@@ -1,0 +1,2431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PathPilot v4.0 &mdash; by Emmyxoxo</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g9:#0a2218;--g8:#0d2e1f;--g7:#134a33;--g6:#196342;--g5:#1f7a52;--g4:#2ea86e;
+  --g1:#cff0e3;--g0:#f0fdf6;--gd:#d4a017;--gd2:#e6b52a;--gd3:#f0c84a;--gd1:#fdf4d8;
+  --w:#fff;--s2:#f3f8f4;--s3:#eaf2ec;--bd:#c9dece;
+  --t1:#0a2218;--t2:#3a6350;--tm:#7aaa90;
+  --red:#dc2626;--blue:#2563eb;--purple:#7c3aed;--orange:#ea580c;
+  --sw:262px;--qh:42px;--toph:54px;--r:12px;--rs:8px;--rxs:5px;
+  --sh:0 1px 4px rgba(10,34,24,.08);--shm:0 4px 16px rgba(10,34,24,.13);--shl:0 12px 40px rgba(10,34,24,.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px}
+body{font-family:'Sora',sans-serif;color:var(--t1);background:var(--s2);line-height:1.65;overflow-x:hidden}
+a{text-decoration:none;color:inherit}button{cursor:pointer;font-family:'Sora',sans-serif}
+.qtop{position:fixed;top:0;left:0;right:0;height:var(--qh);z-index:700;background:linear-gradient(135deg,var(--g8),var(--g6));border-bottom:2px solid var(--gd);display:flex;align-items:center;gap:12px;padding:0 22px}
+.qi{font-size:19px;color:var(--gd3);font-family:Georgia,serif;flex-shrink:0;opacity:.8}
+.qt{font-size:12.5px;color:rgba(255,255,255,.9);font-style:italic;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.qa{font-size:11px;color:var(--gd3);font-weight:700;white-space:nowrap;flex-shrink:0}
+.app{display:flex;margin-top:var(--qh);min-height:calc(100vh - var(--qh))}
+#bkdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:580;backdrop-filter:blur(2px)}
+.sb{width:var(--sw);background:var(--g9);position:fixed;top:var(--qh);left:0;height:calc(100vh - var(--qh));overflow-y:auto;z-index:590;display:flex;flex-direction:column;transition:transform .25s cubic-bezier(.4,0,.2,1);scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent}
+.sbrand{display:flex;align-items:center;gap:11px;padding:18px 16px 15px;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.blogoi{font-size:26px;color:var(--gd2)}.bname{font-size:15px;font-weight:700;color:#fff}.bng{color:var(--gd2)}.bfound{font-size:10px;color:rgba(255,255,255,.3);margin-top:1px}
+.snav{flex:1;padding:10px 9px}
+.slbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:rgba(255,255,255,.2);padding:14px 12px 4px}
+.ni{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:var(--rxs);color:rgba(255,255,255,.55);font-size:12.5px;font-weight:500;cursor:pointer;transition:background .12s,color .12s;width:100%;border:none;background:none;text-align:left;white-space:nowrap}
+.ni:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.9)}
+.ni.act{background:var(--gd);color:var(--g9);font-weight:600}
+.nico{font-size:13px;flex-shrink:0;width:18px;text-align:center}
+.sbfoot{display:flex;align-items:center;gap:10px;padding:13px 15px;border-top:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.sbfoot-ico{width:30px;height:30px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--g9);flex-shrink:0}
+.sbfoot-txt{font-size:12px;font-weight:600;color:rgba(255,255,255,.8)}
+.sbfoot-sub{font-size:10px;color:rgba(255,255,255,.3)}
+.main{flex:1;margin-left:var(--sw);display:flex;flex-direction:column;min-height:calc(100vh - var(--qh));width:calc(100% - var(--sw))}
+.topbar{height:var(--toph);background:var(--w);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:14px;padding:0 24px;position:sticky;top:var(--qh);z-index:200;box-shadow:var(--sh)}
+.mtog{display:none;background:none;border:none;font-size:22px;color:var(--t2);padding:4px 8px;border-radius:var(--rxs);cursor:pointer;flex-shrink:0}
+.backbtn{background:none;border:none;font-size:19px;color:var(--t2);padding:4px 9px;border-radius:var(--rxs);cursor:pointer;flex-shrink:0;transition:background .12s,color .12s}
+.backbtn:hover{background:var(--s3);color:var(--g6)}
+.tbtit{font-family:'DM Serif Display',serif;font-size:17px;color:var(--g8);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tbrand{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.tbrand-ico{width:30px;height:30px;background:var(--gd);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--g9);font-weight:700}
+.tbrand-nm{font-size:12px;font-weight:600;color:var(--t2)}
+.pgwrap{flex:1;display:flex;flex-direction:column}
+.pgc{padding:24px 28px;flex:1}
+.pg{display:none}.pg.act{display:block;animation:fi .18s ease both}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.footer{background:var(--g9);color:rgba(255,255,255,.4);padding:15px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:11.5px}
+.fleft{display:flex;align-items:center;gap:10px}
+.flogo{font-size:20px;color:var(--gd2)}.fbrand{font-family:'DM Serif Display',serif;font-size:14px;color:#fff}.fsub{font-size:10.5px;color:rgba(255,255,255,.3)}.femmy{color:var(--gd3)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:var(--rs);font-size:12.5px;font-weight:600;border:none;cursor:pointer;transition:all .15s;white-space:nowrap}
+.bp{background:var(--g6);color:#fff}.bp:hover{background:var(--g7);transform:translateY(-1px)}
+.bg{background:var(--gd);color:var(--g9)}.bg:hover{background:var(--gd2)}
+.bo{background:transparent;border:1.5px solid var(--bd);color:var(--t2)}.bo:hover{border-color:var(--g4);color:var(--g6)}
+.bsm{padding:6px 13px;font-size:11.5px}.blg{padding:12px 26px;font-size:14px}.bbl{width:100%;justify-content:center}.bsuc{background:var(--g4);color:#fff}
+.card{background:var(--w);border-radius:var(--r);border:1px solid var(--bd);box-shadow:var(--sh);overflow:hidden}
+.chd{display:flex;align-items:center;justify-content:space-between;padding:15px 20px;border-bottom:1px solid var(--bd)}
+.ctit{font-family:'DM Serif Display',serif;font-size:17px;color:var(--g8)}.cbd{padding:20px}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px;margin-bottom:22px}
+.sc{background:var(--w);border:1px solid var(--bd);border-radius:var(--r);padding:17px;box-shadow:var(--sh)}
+.sico{width:36px;height:36px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:11px}
+.ig{background:var(--g1);color:var(--g6)}.ib{background:#dbeafe;color:var(--blue)}.ip{background:#ede9fe;color:var(--purple)}.io{background:#fed7aa;color:var(--orange)}.igd{background:var(--gd1);color:var(--gd)}
+.snum{font-family:'DM Serif Display',serif;font-size:30px;color:var(--g7);line-height:1;margin-bottom:4px}.slbl{font-size:11.5px;color:var(--tm);font-weight:500}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:17px}
+.ccard{background:var(--w);border:1px solid var(--bd);border-radius:var(--r);padding:19px;transition:all .15s;position:relative;overflow:hidden;display:flex;flex-direction:column;cursor:pointer}
+.ccard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--g4);transform:scaleX(0);transform-origin:left;transition:transform .15s}
+.ccard:hover{box-shadow:var(--shm);transform:translateY(-2px)}.ccard:hover::after{transform:scaleX(1)}
+.cbadge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 10px;border-radius:20px;background:var(--g1);color:var(--g7);margin-bottom:9px;align-self:flex-start}
+.ctitle{font-family:'DM Serif Display',serif;font-size:16px;color:var(--g8);margin-bottom:5px}
+.csal{font-size:11px;color:var(--g6);font-weight:600;margin-bottom:5px}
+.cdesc{font-size:12.5px;color:var(--t2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.cacts{display:flex;gap:7px;margin-top:12px}
+.subgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.subcard{background:var(--w);border:1px solid var(--bd);border-radius:var(--r);padding:16px;cursor:pointer;transition:all .15s}
+.subcard:hover{box-shadow:var(--shm);border-color:var(--g4);transform:translateY(-1px)}
+.subnm{font-weight:700;font-size:14px;color:var(--g8);margin-bottom:4px}.subcat{font-size:10.5px;color:var(--tm);text-transform:capitalize}
+.skgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:13px}
+.skcard{background:var(--w);border:1px solid var(--bd);border-radius:var(--r);padding:16px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;transition:all .15s}
+.skcard:hover{box-shadow:var(--shm);transform:translateY(-2px)}
+.skico{width:34px;height:34px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.it{background:#dbeafe;color:var(--blue)}.is{background:#ede9fe;color:var(--purple)}
+.sknm{font-weight:600;font-size:13px;color:var(--g8);margin-bottom:3px}
+.skdsc{font-size:12px;color:var(--t2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:17px}
+.cocard{background:var(--w);border:1px solid var(--bd);border-radius:var(--r);padding:18px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column}
+.cocard:hover{box-shadow:var(--shm);transform:translateY(-2px)}
+.cofac{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--tm);margin-bottom:5px}
+.conm{font-family:'DM Serif Display',serif;font-size:15px;color:var(--g8);margin-bottom:5px}
+.codur{font-size:11px;color:var(--tm)}
+.codsc{font-size:12px;color:var(--t2);line-height:1.5;flex:1;margin-top:7px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tag{display:inline-flex;align-items:center;padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:500;margin:2px}
+.tg{background:var(--g1);color:var(--g7)}.tb{background:#dbeafe;color:#1e40af}.tp{background:#ede9fe;color:#5b21b6}.tgd{background:var(--gd1);color:#7a5200}.tgr{background:#f3f4f6;color:#4b5563}
+.treq{background:var(--g1);color:var(--g7)}.tl{display:flex;flex-wrap:wrap;gap:4px}
+.fg{margin-bottom:16px}.fl{display:block;font-size:12.5px;font-weight:600;color:var(--t2);margin-bottom:5px}
+.fc{width:100%;padding:9px 13px;border:1.5px solid var(--bd);border-radius:var(--rs);font-family:'Sora',sans-serif;font-size:13px;color:var(--t1);background:var(--w);outline:none;transition:border-color .15s}
+.fc:focus{border-color:var(--g4);box-shadow:0 0 0 3px rgba(46,168,110,.12)}
+.fc:disabled{opacity:.6;background:var(--s2)}select.fc{cursor:pointer}
+.fhint{font-size:11px;color:var(--tm);margin-top:3px}
+.cpg{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:var(--s3);border:1.5px solid var(--bd);border-radius:var(--rs)}
+.cpill{display:flex;align-items:center;gap:5px;font-size:12.5px;cursor:pointer;padding:5px 11px;border-radius:20px;border:1.5px solid var(--bd);background:#fff;transition:all .12s;user-select:none}
+.cpill.on{background:var(--g1);border-color:var(--g4);color:var(--g8);font-weight:600}
+.alert{display:flex;align-items:center;gap:9px;padding:11px 15px;border-radius:var(--rs);font-size:13px;margin-bottom:16px;border-left:4px solid transparent}
+.as{background:var(--g0);border-color:var(--g4);color:var(--g7)}.ae{background:#fef2f2;border-color:var(--red);color:#991b1b}.ai{background:#eff6ff;border-color:var(--blue);color:#1e3a8a}
+.ph{margin-bottom:22px}.ph h1{font-family:'DM Serif Display',serif;font-size:26px;color:var(--g9);line-height:1.2}.ph p{font-size:13.5px;color:var(--t2);margin-top:5px}
+.fb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+.sw2{position:relative;flex:1;min-width:200px;max-width:360px}.sw2 input{padding-left:36px}
+.sic{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--tm);font-size:14px;pointer-events:none}
+.fchip{padding:6px 14px;border-radius:20px;border:1.5px solid var(--bd);background:#fff;font-size:12px;font-weight:500;cursor:pointer;color:var(--t2);transition:all .15s}
+.fchip.on{background:var(--g7);border-color:var(--g7);color:#fff}.fchip:hover:not(.on){border-color:var(--g4);color:var(--g6)}
+.tabs{display:flex;gap:2px;border-bottom:2px solid var(--bd);margin-bottom:20px}
+.tbtn{padding:9px 18px;border:none;background:none;font-size:13px;font-weight:500;color:var(--t2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
+.tbtn.on{color:var(--g7);border-color:var(--g6);font-weight:600}
+.tpan{display:none}.tpan.on{display:block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.det{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start}
+.mb16{margin-bottom:16px}.mb22{margin-bottom:22px}.mt12{margin-top:12px}.fw6{font-weight:600}
+.fbw{display:flex;align-items:center;justify-content:space-between}
+.wb{background:linear-gradient(135deg,var(--g7),var(--g5));border-radius:var(--r);padding:22px 26px;margin-bottom:22px;color:#fff;position:relative;overflow:hidden}
+.wb::before{content:'✦';position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:90px;opacity:.05}
+.wname{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:4px}.wsub{font-size:13px;opacity:.8}
+.qcard{background:var(--g0);border:1px solid var(--g1);border-left:4px solid var(--gd);border-radius:var(--rs);padding:17px 20px;margin-bottom:22px}
+.qtx2{font-size:14px;color:var(--g8);line-height:1.75;font-style:italic;margin-bottom:8px}.qau2{font-size:12px;font-weight:700;color:#b8860b}
+.rc{display:flex;align-items:flex-start;gap:13px;padding:15px;background:#fff;border:1px solid var(--bd);border-radius:var(--r);margin-bottom:11px;transition:box-shadow .15s}
+.rc:hover{box-shadow:var(--shm)}
+.rrank{width:44px;height:44px;border-radius:var(--rs);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;color:#fff;background:var(--g7);font-size:10px}
+.es{text-align:center;padding:52px 20px;color:var(--t2)}.esic{font-size:44px;margin-bottom:14px;opacity:.35}.es h3{font-size:16px;color:var(--t1);margin-bottom:6px}
+.tw{overflow-x:auto}.dt{width:100%;border-collapse:collapse;font-size:13px}
+.dt th{background:var(--s3);padding:10px 14px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--t2);border-bottom:1px solid var(--bd)}
+.dt td{padding:11px 14px;border-bottom:1px solid var(--bd);vertical-align:middle}
+.dt tr:last-child td{border-bottom:none}.dt tbody tr:hover td{background:#f9fcfa}
+.dset{margin-bottom:20px}
+.dstit{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tm);margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
+.dstx{font-size:13.5px;color:var(--t2);line-height:1.8}
+.bc{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tm);margin-bottom:14px}
+.bc a{color:var(--g6);cursor:pointer}.bc a:hover{text-decoration:underline}
+.toasts{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;flex-direction:column;gap:9px}
+.toast{padding:11px 17px;border-radius:var(--rs);color:#fff;font-size:13px;font-weight:500;box-shadow:var(--shl);min-width:220px;display:flex;align-items:center;gap:8px;animation:tin .28s ease}
+@keyframes tin{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.ts{background:var(--g7)}.te{background:var(--red)}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.wcard{background:var(--w);border:1px solid var(--bd);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px}
+.wcard.emmy{border-left:3px solid var(--gd)}.wtx{font-size:13.5px;color:var(--g8);line-height:1.75;font-style:italic;flex:1}
+.wau{font-size:12px;font-weight:700;color:var(--t2)}.wau.emmy{color:#b8860b}
+details{border-bottom:1px solid var(--bd)}
+details summary{padding:14px 20px;cursor:pointer;font-weight:600;font-size:13.5px;color:var(--g8);list-style:none;display:flex;justify-content:space-between;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary:hover{background:var(--s2)}.ans{padding:0 20px 16px;font-size:13.5px;color:var(--t2);line-height:1.75;background:var(--g0)}
+.pava{width:80px;height:80px;border-radius:50%;background:var(--g7);color:#fff;font-size:28px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;border:3px solid var(--g1);overflow:hidden;cursor:pointer;position:relative}
+.pava img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.pcam{position:absolute;bottom:0;right:0;width:24px;height:24px;background:var(--gd);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid #fff}
+@media(max-width:768px){
+  .sb{transform:translateX(-100%);z-index:600}.sb.open{transform:translateX(0);box-shadow:4px 0 28px rgba(0,0,0,.35)}
+  .main{margin-left:0!important;width:100%!important}.mtog{display:block}
+  .pgc{padding:15px 13px}.cgrid,.cogrid{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr 1fr}
+  .two,.det{grid-template-columns:1fr}.qa{display:none}
+}
+
+/* ── AUTH OVERLAY ── */
+#authOverlay{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#071a10 0%,#0d2e1f 45%,#134a33 100%);overflow:hidden}
+#authOverlay::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% -20%,rgba(46,168,110,.22) 0%,transparent 60%);pointer-events:none}
+#authOverlay::after{content:'';position:absolute;bottom:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.07),transparent 70%);pointer-events:none}
+.auth-stars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.auth-stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:0;animation:twinkle var(--d,3s) var(--dl,0s) infinite}
+@keyframes twinkle{0%,100%{opacity:0}50%{opacity:var(--op,.4)}}
+.auth-box{
+  /* position:relative;z-index:10;width:100%;max-width:440px;margin:0 20px;animation:authIn .5s cubic-bezier(.34,1.56,.64,1) both */
+}
+@keyframes authIn{from{opacity:0;transform:translateY(30px) scale(.95)}to{opacity:1;transform:none}}
+.auth-logo{text-align:center;margin-bottom:28px}
+.auth-logo-ico{font-size:40px;color:var(--gd3);display:block;margin-bottom:6px;filter:drop-shadow(0 0 12px rgba(240,200,74,.4))}
+.auth-logo-nm{font-family:'DM Serif Display',serif;font-size:26px;color:#fff;letter-spacing:-.3px}
+.auth-logo-nm span{color:var(--gd2)}
+.auth-logo-sub{font-size:11.5px;color:rgba(255,255,255,.38);margin-top:4px;letter-spacing:.3px}
+.auth-panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(24px);border-radius:18px;padding:32px;box-shadow:0 32px 64px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08)}
+.auth-tabs{display:flex;background:rgba(0,0,0,.25);border-radius:10px;padding:4px;margin-bottom:26px;gap:4px}
+.auth-tab{flex:1;padding:9px;border:none;border-radius:7px;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.45);background:transparent}
+.auth-tab.on{background:var(--gd);color:var(--g9);box-shadow:0 2px 8px rgba(212,160,23,.35)}
+.auth-form{display:none;animation:fadeUp .22s ease both}
+.auth-form.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.af-group{margin-bottom:15px}
+.af-label{display:block;font-size:11.5px;font-weight:600;
+  color:rgba(255,255,255,.55);
+  margin-bottom:6px;letter-spacing:.3px;text-transform:uppercase}
+.af-input{width:100%;padding:11px 14px;border-radius:10px;border:1.5px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06)
+  ;font-family:'Sora',sans-serif;font-size:13.5px;
+  color:#fff;
+  outline:none;transition:border-color .15s,box-shadow .15s}
+.af-input::placeholder{color:rgba(255,255,255,.25)}
+.af-input:focus{border-color:var(--gd);box-shadow:0 0 0 3px rgba(212,160,23,.18)}
+.af-input.err{border-color:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.15)}
+.af-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.af-hint{font-size:11px;color:rgba(255,255,255,.28);margin-top:4px}
+.af-err{font-size:11.5px;color:#fca5a5;margin-top:5px;display:none}
+.af-err.show{display:block}
+.af-pw{position:relative}
+.af-pw .af-input{padding-right:40px}
+.af-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:16px;padding:2px;transition:color .15s}
+.af-eye:hover{color:rgba(255,255,255,.7)}
+.af-submit{width:100%;padding:13px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--g5),var(--g6));color:#fff;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .18s;margin-top:6px;letter-spacing:.2px;position:relative;overflow:hidden}
+.af-submit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);opacity:0;transition:opacity .15s}
+.af-submit:hover::before{opacity:1}
+.af-submit:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(31,122,82,.45)}
+.af-submit:active{transform:none}
+.af-submit.loading{pointer-events:none;opacity:.7}
+.af-spinner{display:none;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.af-divider{display:flex;align-items:center;gap:10px;margin:18px 0}
+.af-divider::before,.af-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1)}
+.af-divider span{font-size:11px;color:rgba(255,255,255,.3)}
+.af-guest{width:100%;padding:11px;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;background:transparent;color:rgba(255,255,255,.6);font-family:'Sora',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .18s}
+.af-guest:hover{border-color:rgba(255,255,255,.3);color:#fff;background:rgba(255,255,255,.05)}
+.af-check{display:flex;align-items:flex-start;gap:9px;cursor:pointer;margin-bottom:15px}
+.af-check input{margin-top:2px;accent-color:var(--gd);flex-shrink:0;cursor:pointer}
+.af-check span{font-size:12px;color:rgba(255,255,255,.45);line-height:1.5}
+.af-link{color:var(--gd3);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.auth-bottom{text-align:center;margin-top:20px;font-size:11.5px;color:rgba(255,255,255,.28)}
+.auth-bottom strong{color:var(--gd3);font-size:10px;display:block;margin-top:6px}
+.auth-success-overlay{position:absolute;inset:0;background:rgba(7,26,16,.92);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:20;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(6px)}
+.auth-success-overlay.show{opacity:1;pointer-events:all}
+.auth-success-ico{font-size:52px;margin-bottom:12px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) .1s both}
+@keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+.auth-success-tx{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;margin-bottom:6px}
+.auth-success-sub{font-size:13px;color:rgba(255,255,255,.5)}
+.auth-bar{position:absolute;bottom:0;left:0;height:3px;background:var(--gd);border-radius:0 0 18px 18px;width:0;transition:width 1.8s linear}
+/* ── USER NAV ITEM (topbar) ── */
+.user-chip{display:flex;align-items:center;gap:7px;background:rgba(31,122,82,.12);border:1.5px solid rgba(31,122,82,.25);border-radius:20px;padding:5px 12px 5px 6px;cursor:pointer;transition:all .15s;flex-shrink:0}
+.user-chip:hover{background:rgba(31,122,82,.2);border-color:var(--g4)}
+.user-chip-av{width:24px;height:24px;border-radius:50%;background:var(--gd);color:var(--g9);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.user-chip-av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.user-chip-nm{font-size:12px;font-weight:600;color:var(--g7)}
+.user-drop{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--shl);min-width:190px;z-index:500;overflow:hidden;display:none;animation:fi .15s ease both}
+.user-drop.open{display:block}
+.ud-head{padding:13px 16px;background:var(--g0);border-bottom:1px solid var(--bd)}
+.ud-nm{font-weight:700;font-size:13.5px;color:var(--g8)}
+.ud-em{font-size:11px;color:var(--tm)}
+.ud-item{display:flex;align-items:center;gap:9px;padding:10px 16px;font-size:13px;color:var(--t2);cursor:pointer;transition:background .12s;border:none;background:none;width:100%;text-align:left}
+.ud-item:hover{background:var(--s2);color:var(--g7)}
+.ud-item.logout{color:var(--red);border-top:1px solid var(--bd)}
+</style>
+</head>
+<body>
+<!-- ══════════════════════════════════════
+     AUTH OVERLAY — Login / Register
+══════════════════════════════════════ -->
+<div id="authOverlay">
+  <!-- Twinkling stars -->
+  <div class="auth-stars" id="authStars"></div>
+
+  <div class="auth-box">
+    <!-- Logo -->
+    <div class="auth-logo">
+      <span class="auth-logo-ico">&#10045;</span>
+      <div class="auth-logo-nm">Path<span>Pilot</span></div>
+      <div class="auth-logo-sub">by Emmyxoxo &mdash; Career Guidance Information System v4.0</div>
+    </div>
+
+    <!-- Panel -->
+    <div class="auth-panel" style="position:relative">
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab on" id="atab-login" onclick="switchAuthTab('login')">Sign In</button>
+        <button class="auth-tab" id="atab-register" onclick="switchAuthTab('register')">Create Account</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div class="auth-form on" id="af-login">
+        <div class="af-group">
+          <label class="af-label">Email Address</label>
+          <input type="email" class="af-input" id="li-email" placeholder="you@example.com" autocomplete="email">
+          <div class="af-err" id="li-email-err">Please enter a valid email address.</div>
+        </div>
+        <div class="af-group">
+          <label class="af-label">Password</label>
+          <div class="af-pw">
+            <input type="password" class="af-input" id="li-pass" placeholder="Your password" autocomplete="current-password">
+            <button class="af-eye" onclick="togglePw('li-pass',this)" tabindex="-1">&#128065;</button>
+          </div>
+          <div class="af-err" id="li-pass-err">Password must be at least 6 characters.</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <label class="af-check" style="margin-bottom:0">
+            <input type="checkbox" id="li-remember">
+            <span>Remember me</span>
+          </label>
+          <span class="af-link" style="font-size:12px" onclick="showForgot()">Forgot password?</span>
+        </div>
+        <div class="af-err" id="li-global-err" style="text-align:center;margin-bottom:10px"></div>
+        <button class="af-submit" id="li-btn" onclick="doLogin()">
+          <span id="li-btn-tx">Sign In to PathPilot</span>
+          <div class="af-spinner" id="li-spin"></div>
+        </button>
+        <div class="af-divider"><span>or</span></div>
+        <button class="af-guest" onclick="guestAccess()">&#9654; Continue as Guest &mdash; no account needed</button>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div class="auth-form" id="af-register">
+        <div class="af-row">
+          <div class="af-group">
+            <label class="af-label">First Name</label>
+            <input type="text" class="af-input" id="rg-fname" placeholder="First name" autocomplete="given-name">
+            <div class="af-err" id="rg-fname-err">Required.</div>
+          </div>
+          <div class="af-group">
+            <label class="af-label">Last Name</label>
+            <input type="text" class="af-input" id="rg-lname" placeholder="Last name" autocomplete="family-name">
+            <div class="af-err" id="rg-lname-err">Required.</div>
+          </div>
+        </div>
+        <div class="af-group">
+          <label class="af-label">Email Address</label>
+          <input type="email" class="af-input" id="rg-email" placeholder="you@example.com" autocomplete="email">
+          <div class="af-err" id="rg-email-err">Enter a valid email.</div>
+        </div>
+        <div class="af-group">
+          <label class="af-label">School / Institution</label>
+          <input type="text" class="af-input" id="rg-school" placeholder="e.g. UNIOSUN, UNILAG, Federal Gov't College...">
+          <div class="af-hint">Optional — helps personalise your experience</div>
+        </div>
+        <div class="af-group">
+          <label class="af-label">Password</label>
+          <div class="af-pw">
+            <input type="password" class="af-input" id="rg-pass" placeholder="Create a password" autocomplete="new-password">
+            <button class="af-eye" onclick="togglePw('rg-pass',this)" tabindex="-1">&#128065;</button>
+          </div>
+          <div class="af-hint" id="rg-pass-strength" style="margin-top:5px"></div>
+          <div class="af-err" id="rg-pass-err">At least 6 characters required.</div>
+        </div>
+        <div class="af-group">
+          <label class="af-label">Confirm Password</label>
+          <div class="af-pw">
+            <input type="password" class="af-input" id="rg-pass2" placeholder="Repeat your password" autocomplete="new-password">
+            <button class="af-eye" onclick="togglePw('rg-pass2',this)" tabindex="-1">&#128065;</button>
+          </div>
+          <div class="af-err" id="rg-pass2-err">Passwords do not match.</div>
+        </div>
+        <div class="af-group">
+          <label class="af-label">Security Question</label>
+          <select class="af-input" id="rg-secq">
+            <option value="">Select a security question&hellip;</option>
+            <option>What is the name of your favourite teacher?</option>
+            <option>What is the name of your first school?</option>
+            <option>What is your mother's first name?</option>
+            <option>What city were you born in?</option>
+            <option>What is the name of your best childhood friend?</option>
+          </select>
+          <div class="af-err" id="rg-secq-err">Please select a security question.</div>
+        </div>
+        <div class="af-group">
+          <label class="af-label">Security Answer</label>
+          <input type="text" class="af-input" id="rg-seca" placeholder="Your answer" autocomplete="off">
+          <div class="af-hint">Used to reset your password if you forget it &mdash; answer isn't case sensitive.</div>
+          <div class="af-err" id="rg-seca-err">Please provide an answer.</div>
+        </div>
+        <label class="af-check">
+          <input type="checkbox" id="rg-terms">
+          <span>I agree to use PathPilot responsibly. This is a free, educational tool by <span class="af-link">Emmyxoxo</span>.</span>
+        </label>
+        <div class="af-err" id="rg-terms-err" style="margin-bottom:10px">Please accept to continue.</div>
+        <div class="af-err" id="rg-global-err" style="text-align:center;margin-bottom:10px"></div>
+        <button class="af-submit" id="rg-btn" onclick="doRegister()">
+          <span id="rg-btn-tx">Create My Account</span>
+          <div class="af-spinner" id="rg-spin"></div>
+        </button>
+        <div class="af-divider"><span>or</span></div>
+        <button class="af-guest" onclick="guestAccess()">&#9654; Continue as Guest &mdash; no account needed</button>
+      </div>
+
+      <!-- SUCCESS OVERLAY -->
+      <div class="auth-success-overlay" id="authSuccess">
+        <div class="auth-success-ico" id="authSuccessIco">&#9989;</div>
+        <div class="auth-success-tx" id="authSuccessTx">Welcome back!</div>
+        <div class="auth-success-sub" id="authSuccessSub">Taking you to your dashboard...</div>
+        <div class="auth-bar" id="authBar"></div>
+      </div>
+
+    </div><!-- /auth-panel -->
+
+    <div class="auth-bottom">
+      Free &bull; No subscription &bull; Built for Nigerian students
+      <strong>PathPilot v4.0 &mdash; Emmyxoxo &copy; 2026</strong>
+    </div>
+  </div><!-- /auth-box -->
+</div><!-- /authOverlay -->
+
+<!-- ══════════════════════════════════════
+     FORGOT PASSWORD OVERLAY — security question flow
+══════════════════════════════════════ -->
+<div id="forgotOverlay" style="display:none;position:fixed;inset:0;z-index:2100;align-items:center;justify-content:center;background:rgba(7,26,16,.94);backdrop-filter:blur(8px)">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <span class="auth-logo-ico">&#128273;</span>
+      <div class="auth-logo-nm">Reset password</div>
+      <div class="auth-logo-sub">PathPilot &mdash; account recovery</div>
+    </div>
+    <div class="auth-panel" style="position:relative">
+
+      <!-- STEP 1: enter email -->
+      <div class="auth-form on" id="fp-step1">
+        <div class="af-group">
+          <label class="af-label">Registered Email Address</label>
+          <input type="email" class="af-input" id="fp-email" placeholder="you@example.com" autocomplete="email">
+          <div class="af-err" id="fp-email-err">We couldn't find an account with that email.</div>
+        </div>
+        <button class="af-submit" id="fp1-btn" onclick="fpFindAccount()">
+          <span id="fp1-btn-tx">Find My Account</span>
+          <div class="af-spinner" id="fp1-spin"></div>
+        </button>
+        <div class="af-divider"><span>or</span></div>
+        <button class="af-guest" onclick="fpCancel()">&#8592; Back to sign in</button>
+      </div>
+
+      <!-- STEP 2: answer security question -->
+      <div class="auth-form" id="fp-step2">
+        <div class="af-group">
+          <label class="af-label">Your Security Question</label>
+          <div style="padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);color:rgba(255,255,255,.85);font-size:13.5px" id="fp-secq-tx">&mdash;</div>
+        </div>
+        <div class="af-group">
+          <label class="af-label">Your Answer</label>
+          <input type="text" class="af-input" id="fp-seca" placeholder="Enter your answer" autocomplete="off">
+          <div class="af-err" id="fp-seca-err">That answer doesn't match our records.</div>
+        </div>
+        <button class="af-submit" id="fp2-btn" onclick="fpVerifyAnswer()">
+          <span id="fp2-btn-tx">Verify Answer</span>
+          <div class="af-spinner" id="fp2-spin"></div>
+        </button>
+        <div class="af-divider"><span>or</span></div>
+        <button class="af-guest" onclick="fpCancel()">&#8592; Back to sign in</button>
+      </div>
+
+      <!-- STEP 3: set new password -->
+      <div class="auth-form" id="fp-step3">
+        <div class="af-group">
+          <label class="af-label">New Password</label>
+          <div class="af-pw">
+            <input type="password" class="af-input" id="fp-pass" placeholder="Create a new password" autocomplete="new-password">
+            <button class="af-eye" onclick="togglePw('fp-pass',this)" tabindex="-1">&#128065;</button>
+          </div>
+          <div class="af-err" id="fp-pass-err">At least 6 characters required.</div>
+        </div>
+        <div class="af-group">
+          <label class="af-label">Confirm New Password</label>
+          <div class="af-pw">
+            <input type="password" class="af-input" id="fp-pass2" placeholder="Repeat your new password" autocomplete="new-password">
+            <button class="af-eye" onclick="togglePw('fp-pass2',this)" tabindex="-1">&#128065;</button>
+          </div>
+          <div class="af-err" id="fp-pass2-err">Passwords do not match.</div>
+        </div>
+        <button class="af-submit" id="fp3-btn" onclick="fpResetPassword()">
+          <span id="fp3-btn-tx">Save New Password</span>
+          <div class="af-spinner" id="fp3-spin"></div>
+        </button>
+      </div>
+
+    </div><!-- /auth-panel -->
+    <div class="auth-bottom">Account recovery uses the security question you set at registration.</div>
+  </div><!-- /auth-box -->
+</div><!-- /forgotOverlay -->
+
+<div class="qtop">
+  <span class="qi">&#8220;</span>
+  <span class="qt" id="qtx">Loading...</span>
+  <span class="qa" id="qau"></span>
+</div>
+<div class="app">
+<div id="bkdrop" onclick="closeSB()"></div>
+<aside class="sb" id="sidebar">
+  <div class="sbrand">
+    <span class="blogoi">&#10045;</span>
+    <div><div class="bname">Path<span class="bng">Pilot</span></div>
+    <!-- <div class="bfound">by Emmyxoxo &mdash; Free public access</div> -->
+  </div>
+  </div>
+  <nav class="snav">
+    <div class="slbl">Explore</div>
+    <button class="ni" id="ni-dashboard" onclick="go('dashboard')"><span class="nico">&#9636;</span>Dashboard</button>
+    <button class="ni" id="ni-careers"   onclick="go('careers')"><span class="nico">&#9670;</span>Explore Careers</button>
+    <button class="ni" id="ni-courses"   onclick="go('courses')"><span class="nico">&#9632;</span>Courses</button>
+    <button class="ni" id="ni-subjects"  onclick="go('subjects')"><span class="nico">&#128218;</span>Subjects</button>
+    <button class="ni" id="ni-skills"    onclick="go('skills')"><span class="nico">&#9650;</span>Skills Guide</button>
+    <div class="slbl">Tools</div>
+    <button class="ni" id="ni-recommend" onclick="go('recommend')"><span class="nico">&#9733;</span>Recommendations</button>
+    <button class="ni" id="ni-compare"   onclick="go('compare')"><span class="nico">&#9878;</span>Compare Careers</button>
+    <button class="ni" id="ni-quiz"      onclick="go('quiz')"><span class="nico">&#9998;</span>Career Quiz</button>
+    <button class="ni" id="ni-market"    onclick="go('market')"><span class="nico">&#128200;</span>Market Insights</button>
+    <div class="slbl">My Space</div>
+    <button class="ni" id="ni-saved"     onclick="go('saved')"><span class="nico">&#9825;</span>Saved Careers</button>
+    <button class="ni" id="ni-wisdom"    onclick="go('wisdom')"><span class="nico">&#128161;</span>Wisdom Hub</button>
+    <button class="ni" id="ni-faq"       onclick="go('faq')"><span class="nico">?</span>Help &amp; FAQ</button>
+    <button class="ni" id="ni-profile"   onclick="go('profile')"><span class="nico">&#9737;</span>My Profile</button>
+  </nav>
+  <div class="sbfoot" id="sbFootGuest">
+    <div class="sbfoot-ico">&#10045;</div>
+    <div>
+      <div class="sbfoot-txt">PathPilot</div>
+      <div class="sbfoot-sub" style="cursor:pointer;color:var(--gd3)" onclick="showAuthOverlay()">&#9654; Sign in / Register</div>
+    </div>
+  </div>
+  <div class="sbfoot" id="sbFootUser" style="display:none">
+    <div class="sbfoot-ico" id="sbAva">E</div>
+    <div style="flex:1;min-width:0">
+      <div class="sbfoot-txt" id="sbUname">Emmy xoxo</div>
+      <div class="sbfoot-sub" style="cursor:pointer;color:#ef9f9f" onclick="doLogout()">Sign out</div>
+    </div>
+  </div>
+</aside>
+<div class="main" id="mainWrap">
+  <header class="topbar" style="position:relative">
+    <button class="mtog" id="menuTog">&#9776;</button>
+    <button class="backbtn" id="backBtn" onclick="goBack()" style="display:none" title="Go back" aria-label="Go back">&#8592;</button>
+    <div class="tbtit" id="topTitle">Dashboard</div>
+    <div class="tbrand" id="guestBrand">
+      <div class="tbrand-ico">&#10045;</div>
+      <div class="tbrand-nm">PathPilot</div>
+    </div>
+    <div class="user-chip" id="userChip" style="display:none" onclick="toggleUserDrop()">
+      <div class="user-chip-av" id="chipAv">E</div>
+      <span class="user-chip-nm" id="chipNm">Emmy</span>
+      <span style="font-size:10px;color:var(--tm);margin-left:2px">&#9660;</span>
+    </div>
+    <div class="user-drop" id="userDrop">
+      <div class="ud-head">
+        <div class="ud-nm" id="dropName">Emmy xoxo</div>
+        <div class="ud-em" id="dropEmail">student@example.com</div>
+      </div>
+      <button class="ud-item" onclick="go('profile');closeUserDrop()">&#9737; My Profile</button>
+      <button class="ud-item" onclick="go('saved');closeUserDrop()">&#9825; Saved Careers</button>
+      <button class="ud-item logout" onclick="doLogout()">&#8594; Sign Out</button>
+    </div>
+  </header>
+  <div class="pgwrap"><div class="pgc">
+
+
+<!-- DASHBOARD -->
+<div class="pg" id="pg-dashboard">
+  <div class="wb"><div>
+    <div class="wname" id="dWel">Good day, Emmy &#128075;</div>
+    <div class="wsub" id="dWelSub">Career Guidance Dashboard &mdash; built by <strong>Emmyxoxo</strong> &mdash; free, no account needed</div>
+  </div></div>
+  <div class="qcard mb22"><div class="qic">&#8220;</div><p class="qtx2" id="dqtx"></p><div class="qau2" id="dqau"></div></div>
+  <div class="sgrid">
+    <div class="sc"><div class="sico ig">&#9670;</div><div class="snum">105</div><div class="slbl">Careers</div></div>
+    <div class="sc"><div class="sico ib">&#9632;</div><div class="snum">105</div><div class="slbl">Courses</div></div>
+    <div class="sc"><div class="sico ip">&#9650;</div><div class="snum">40</div><div class="slbl">Skills</div></div>
+    <div class="sc"><div class="sico io">&#128218;</div><div class="snum">17</div><div class="slbl">Subjects</div></div>
+    <div class="sc"><div class="sico igd">&#9825;</div><div class="snum" id="dSaved">0</div><div class="slbl">Saved</div></div>
+    <div class="sc"><div class="sico ig">&#9733;</div><div class="snum" id="dRecs">0</div><div class="slbl">Recommendations</div></div>
+  </div>
+  <div class="two mb22">
+    <div class="card">
+      <div class="chd"><span class="ctit">Saved Careers</span><button class="btn bsm bo" onclick="go('saved')">View All</button></div>
+      <div id="dSavedList"><div class="es" style="padding:28px"><div class="esic">&#9825;</div><p>No saved careers yet.</p></div></div>
+    </div>
+    <div class="card">
+      <div class="chd"><span class="ctit">Recommendations</span><button class="btn bsm bp" onclick="go('recommend')">&#9733; Refresh</button></div>
+      <div class="cbd" style="padding:13px" id="dRecList">
+        <div class="es" style="padding:24px 12px"><div class="esic">&#9733;</div><h3>No recommendations yet</h3>
+        <button class="btn bp bsm mt12" onclick="go('recommend')">Take Quiz</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="card"><div class="cbd">
+    <div style="font-family:'DM Serif Display',serif;font-size:16px;color:var(--g8);margin-bottom:13px">Quick Actions</div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap">
+      <button class="btn bp" onclick="go('careers')">&#9670; Careers</button>
+      <button class="btn bo" onclick="go('courses')">&#9632; Courses</button>
+      <button class="btn bo" onclick="go('subjects')">&#128218; Subjects</button>
+      <button class="btn bo" onclick="go('skills')">&#9650; Skills</button>
+      <button class="btn bg" onclick="go('recommend')">&#9733; Get Recommendations</button>
+      <button class="btn bo" onclick="go('quiz')">&#9998; Career Quiz</button>
+    </div>
+  </div></div>
+  
+</div>
+
+<!-- CAREERS -->
+<div class="pg" id="pg-careers">
+  <div class="ph"><h1>Explore Careers</h1><p>Browse 105 careers &mdash; click any card for full details.</p></div>
+  <div class="fb">
+    <div class="sw2"><span class="sic">&#128269;</span>
+      <input type="text" class="fc" placeholder="Search careers..." id="carSrch" oninput="renderCars()">
+    </div>
+    <select class="fc" style="width:auto" id="carCat" onchange="renderCars()">
+      <option value="">All Categories</option>
+      <option>Technology</option><option>Healthcare</option><option>Engineering</option>
+      <option>Finance</option><option>Law</option><option>Media</option>
+      <option>Education</option><option>Science</option>
+    </select>
+    <select class="fc" style="width:auto" id="carStr" onchange="renderCars()">
+      <option value="">All Streams</option>
+      <option value="science">Science</option><option value="commercial">Commercial</option>
+      <option value="art">Art</option><option value="technical">Technical</option>
+    </select>
+  </div>
+  <div class="cgrid" id="carGrid"></div>
+</div>
+
+<!-- CAREER DETAIL -->
+<div class="pg" id="pg-cardet">
+  <div class="bc"><a onclick="go('careers')">Careers</a> &rsaquo; <span id="cdbc">...</span></div>
+  <div class="det">
+    <div>
+      <div class="card mb22" id="cdMain"></div>
+      <div class="card mb22" id="cdSubj" style="display:none"></div>
+      <div class="card mb22" id="cdCourses"></div>
+      <div class="card" id="cdSkills"></div>
+    </div>
+    <div>
+      <div class="card mb16" id="cdRelated"></div>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-top:9px">
+        <button class="btn bg bbl" onclick="go('recommend')">&#9733; Get Personalised Recs</button>
+        <button class="btn bo bbl" onclick="go('careers')">&#8592; All Careers</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COURSES -->
+<div class="pg" id="pg-courses">
+  <div class="ph"><h1>Courses</h1><p>Browse 105 courses &mdash; click for careers, subjects and skills.</p></div>
+  <div class="fb">
+    <div class="sw2"><span class="sic">&#128269;</span>
+      <input type="text" class="fc" placeholder="Search courses..." id="coSrch" oninput="renderCos()">
+    </div>
+    <select class="fc" style="width:auto" id="coStr" onchange="renderCos()">
+      <option value="">All Streams</option>
+      <option value="science">Science</option><option value="commercial">Commercial</option>
+      <option value="art">Art</option><option value="technical">Technical</option>
+    </select>
+  </div>
+  <div class="cogrid" id="coGrid"></div>
+</div>
+
+<!-- COURSE DETAIL -->
+<div class="pg" id="pg-codet">
+  <div class="bc"><a onclick="go('courses')">Courses</a> &rsaquo; <span id="codbc">...</span></div>
+  <div class="det">
+    <div><div class="card mb22" id="codMain"></div><div class="card" id="codCareers"></div></div>
+    <div><div class="card mb16" id="codSubj"></div>
+      <button class="btn bg bbl mt12" onclick="go('recommend')">&#9733; Career Recs</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUBJECTS -->
+<div class="pg" id="pg-subjects">
+  <div class="ph"><h1>Subjects</h1><p>Click any subject to see which courses and careers it leads to.</p></div>
+  <div class="fb">
+    <div class="sw2"><span class="sic">&#128269;</span>
+      <input type="text" class="fc" placeholder="Search subjects..." oninput="filterSubs(this.value)">
+    </div>
+    <button class="fchip on" onclick="filterSubCat('',this)">All</button>
+    <button class="fchip" onclick="filterSubCat('core',this)">Core</button>
+    <button class="fchip" onclick="filterSubCat('science',this)">Science</button>
+    <button class="fchip" onclick="filterSubCat('commercial',this)">Commercial</button>
+    <button class="fchip" onclick="filterSubCat('art',this)">Art</button>
+    <button class="fchip" onclick="filterSubCat('technical',this)">Technical</button>
+  </div>
+  <div class="subgrid" id="subGrid"></div>
+</div>
+
+<!-- SUBJECT DETAIL -->
+<div class="pg" id="pg-subdet">
+  <div class="bc"><a onclick="go('subjects')">Subjects</a> &rsaquo; <span id="sdbc">...</span></div>
+  <div class="det">
+    <div><div class="card mb22" id="sdMain"></div><div class="card" id="sdCourses"></div></div>
+    <div><div class="card mb16" id="sdCareers"></div>
+      <button class="btn bg bbl mt12" onclick="go('recommend')">&#9733; Career Recs</button>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="pg" id="pg-skills">
+  <div class="ph"><h1>Skills Guide</h1><p>Click any skill for explanation, how to learn it, and careers that need it.</p></div>
+  <div class="tabs">
+    <button class="tbtn on" id="tb-tech" onclick="swTab('tech')">&#128295; Technical Skills (20)</button>
+    <button class="tbtn" id="tb-soft" onclick="swTab('soft')">&#128172; Soft Skills (20)</button>
+  </div>
+  <div class="tpan on" id="tp-tech">
+    <div class="fb mb16"><div class="sw2"><span class="sic">&#128269;</span>
+      <input type="text" class="fc" placeholder="Search technical..." oninput="filterSk('tech',this.value)">
+    </div></div>
+    <div class="skgrid" id="sk-tech"></div>
+  </div>
+  <div class="tpan" id="tp-soft">
+    <div class="fb mb16"><div class="sw2"><span class="sic">&#128269;</span>
+      <input type="text" class="fc" placeholder="Search soft..." oninput="filterSk('soft',this.value)">
+    </div></div>
+    <div class="skgrid" id="sk-soft"></div>
+  </div>
+</div>
+
+<!-- SKILL DETAIL -->
+<div class="pg" id="pg-skdet">
+  <div class="bc"><a onclick="go('skills')">Skills</a> &rsaquo; <span id="skdbc">...</span></div>
+  <div class="det">
+    <div><div class="card mb22" id="skdMain"></div></div>
+    <div>
+      <div class="card mb16" id="skdCareers"></div>
+      <button class="btn bg bbl mt12" onclick="go('recommend')">&#9733; Career Recs</button>
+      <button class="btn bo bbl" style="margin-top:9px" onclick="go('skills')">&#8592; All Skills</button>
+    </div>
+  </div>
+</div>
+
+<!-- RECOMMENDATIONS -->
+<div class="pg" id="pg-recommend">
+  <div class="ph"><h1>Career Recommendations</h1><p>Rule-based engine by Emmyxoxo &mdash; matches stream, interests and subjects.</p></div>
+  <div id="recResults" style="display:none;margin-bottom:22px"></div>
+  <div id="recForm">
+    <div class="card"><div class="cbd">
+      <div class="fg"><label class="fl">1. Your school stream</label><div class="cpg" id="streamPills">
+        <label class="cpill"><input type="radio" name="stream" value="science"> &#128300; Science</label>
+        <label class="cpill"><input type="radio" name="stream" value="commercial"> &#128202; Commercial</label>
+        <label class="cpill"><input type="radio" name="stream" value="art"> &#127912; Art / Humanities</label>
+        <label class="cpill"><input type="radio" name="stream" value="technical"> &#128295; Technical</label>
+      </div></div>
+      <div class="fg"><label class="fl">2. Areas that interest you</label><div class="cpg" id="intPills">
+        <label class="cpill"><input type="checkbox" value="technology"> &#128187; Technology</label>
+        <label class="cpill"><input type="checkbox" value="healthcare"> &#127973; Healthcare</label>
+        <label class="cpill"><input type="checkbox" value="engineering"> &#9881; Engineering</label>
+        <label class="cpill"><input type="checkbox" value="business"> &#128200; Business/Finance</label>
+        <label class="cpill"><input type="checkbox" value="law"> &#9878; Law &amp; Public Service</label>
+        <label class="cpill"><input type="checkbox" value="media"> &#127916; Media &amp; Arts</label>
+        <label class="cpill"><input type="checkbox" value="education"> &#128218; Education</label>
+        <label class="cpill"><input type="checkbox" value="science"> &#128300; Research &amp; Science</label>
+        <label class="cpill"><input type="checkbox" value="agriculture"> &#127807; Agriculture</label>
+      </div></div>
+      <div class="fg"><label class="fl">3. Your subjects (select all you study)</label><div class="cpg" id="subPills">
+        <label class="cpill"><input type="checkbox" value="Mathematics"> Mathematics</label>
+        <label class="cpill"><input type="checkbox" value="Physics"> Physics</label>
+        <label class="cpill"><input type="checkbox" value="Chemistry"> Chemistry</label>
+        <label class="cpill"><input type="checkbox" value="Biology"> Biology</label>
+        <label class="cpill"><input type="checkbox" value="Economics"> Economics</label>
+        <label class="cpill"><input type="checkbox" value="Government"> Government</label>
+        <label class="cpill"><input type="checkbox" value="Literature in English"> Literature</label>
+        <label class="cpill"><input type="checkbox" value="Further Mathematics"> Further Maths</label>
+        <label class="cpill"><input type="checkbox" value="Agricultural Science"> Agric Science</label>
+        <label class="cpill"><input type="checkbox" value="Accounting"> Accounting</label>
+        <label class="cpill"><input type="checkbox" value="Commerce"> Commerce</label>
+        <label class="cpill"><input type="checkbox" value="Geography"> Geography</label>
+        <label class="cpill"><input type="checkbox" value="Fine Art"> Fine Art</label>
+        <label class="cpill"><input type="checkbox" value="Computer Studies"> Computer Studies</label>
+        <label class="cpill"><input type="checkbox" value="French"> French</label>
+      </div></div>
+      <button class="btn bg blg bbl" onclick="genRecs()">&#10022; Generate My Career Recommendations</button>
+    </div></div>
+  </div>
+</div>
+
+<!-- COMPARE -->
+<div class="pg" id="pg-compare">
+  <div class="ph"><h1>Compare Careers</h1><p>Select up to 3 careers to compare side by side.</p></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:18px">
+    <div class="fg"><label class="fl">Career 1</label><select class="fc" id="cmp1" onchange="renderCmp()"><option value="">&#8212; Select &#8212;</option></select></div>
+    <div class="fg"><label class="fl">Career 2</label><select class="fc" id="cmp2" onchange="renderCmp()"><option value="">&#8212; Select &#8212;</option></select></div>
+    <div class="fg"><label class="fl">Career 3</label><select class="fc" id="cmp3" onchange="renderCmp()"><option value="">&#8212; Select &#8212;</option></select></div>
+  </div>
+  <div id="cmpRes"></div>
+</div>
+
+<!-- QUIZ -->
+<div class="pg" id="pg-quiz"><div id="quizBody"></div></div>
+
+<!-- MARKET -->
+<div class="pg" id="pg-market">
+  <div class="ph"><h1>Nigeria Career Market Insights</h1><p>Real data on Nigeria's job market, salary trends, sector growth and career demand &mdash; to guide your career decisions.</p></div>
+
+  <!-- Key stats -->
+  <div class="sgrid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))">
+    <div class="sc"><div class="sico ig">&#128200;</div><div class="snum">28%</div><div class="slbl">Tech sector growth (2023-2025)</div></div>
+    <div class="sc"><div class="sico ib">&#128188;</div><div class="snum">310K+</div><div class="slbl">New tech roles projected</div></div>
+    <div class="sc"><div class="sico igd">&#128176;</div><div class="snum">&#8358;380K</div><div class="slbl">Avg mid-level tech salary/month</div></div>
+    <div class="sc"><div class="sico ip">&#127758;</div><div class="snum">40%</div><div class="slbl">Remote-capable roles</div></div>
+    <div class="sc"><div class="sico io">&#127973;</div><div class="snum">18%</div><div class="slbl">Healthcare workforce shortage</div></div>
+    <div class="sc"><div class="sico ig">&#127807;</div><div class="snum">35%</div><div class="slbl">Agri-tech sector growth</div></div>
+    <div class="sc"><div class="sico ib">&#127979;</div><div class="snum">2.1M</div><div class="slbl">New graduates annually</div></div>
+    <div class="sc"><div class="sico ip">&#128640;</div><div class="snum">$800B</div><div class="slbl">Nigeria GDP target 2030</div></div>
+  </div>
+
+  <!-- Tabs for different insights -->
+  <div class="tabs">
+    <button class="tbtn on" id="mkt-tb-sectors" onclick="mktTab('sectors')">&#128200; Sectors</button>
+    <button class="tbtn" id="mkt-tb-salaries" onclick="mktTab('salaries')">&#128176; Salaries</button>
+    <button class="tbtn" id="mkt-tb-charts" onclick="mktTab('charts')">&#128202; Charts</button>
+    <button class="tbtn" id="mkt-tb-demand" onclick="mktTab('demand')">&#9889; Hot Careers</button>
+    <button class="tbtn" id="mkt-tb-global" onclick="mktTab('global')">&#127758; Global Trends</button>
+  </div>
+
+  <!-- SECTORS TAB -->
+  <div class="tpan on" id="mkt-sectors">
+    <div class="two">
+      <div class="card"><div class="chd"><span class="ctit">Fastest Growing Sectors</span></div><div id="mktSec"></div></div>
+      <div class="card"><div class="chd"><span class="ctit">Sector Employment Share</span></div>
+        <div id="mktShareBars" style="padding:16px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SALARIES TAB -->
+  <div class="tpan" id="mkt-salaries">
+    <div class="card mb22"><div class="chd"><span class="ctit">Full Salary Benchmarks by Career</span><span class="tag tg">30 careers</span></div>
+      <div class="tw"><table class="dt"><thead><tr><th>Career</th><th>Category</th><th>Entry Level</th><th>Mid Level</th><th>Senior Level</th><th>Top Earners</th></tr></thead>
+      <tbody id="mktSalFull"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- CHARTS TAB -->
+  <div class="tpan" id="mkt-charts">
+    <div class="two mb22">
+      <div class="card"><div class="chd"><span class="ctit">Sector Growth Comparison (%)</span></div>
+        <canvas id="growthChart" height="280" style="padding:16px;width:100%"></canvas>
+      </div>
+      <div class="card"><div class="chd"><span class="ctit">Average Salary by Category (N)</span></div>
+        <canvas id="salaryChart" height="280" style="padding:16px;width:100%"></canvas>
+      </div>
+    </div>
+    <div class="card"><div class="chd"><span class="ctit">Stream-to-Career Demand Distribution</span></div>
+      <canvas id="streamChart" height="200" style="padding:16px;width:100%"></canvas>
+    </div>
+  </div>
+
+  <!-- DEMAND TAB -->
+  <div class="tpan" id="mkt-demand">
+    <div id="hotCareersGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px"></div>
+  </div>
+
+  <!-- GLOBAL TRENDS TAB -->
+  <div class="tpan" id="mkt-global">
+    <div class="two mb22">
+      <div class="card">
+        <div class="chd"><span class="ctit">The "Japa Effect" &#127758;</span></div>
+        <div class="cbd">
+          <p style="font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:14px">Many Nigerian professionals now earn <strong>$2K&ndash;$8K/month</strong> remotely for global companies. The diaspora tech talent pool is now Nigeria's second-largest foreign exchange earner after oil.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="padding:14px;background:var(--g0);border-radius:var(--rs)"><div style="font-size:20px;font-weight:700;color:var(--g6)">$2K-$8K</div><div style="font-size:11.5px;color:var(--t2)">Monthly remote salary</div></div>
+            <div style="padding:14px;background:var(--g0);border-radius:var(--rs)"><div style="font-size:20px;font-weight:700;color:var(--g6)">UK/CA/US</div><div style="font-size:11.5px;color:var(--t2)">Top destination countries</div></div>
+            <div style="padding:14px;background:var(--g0);border-radius:var(--rs)"><div style="font-size:20px;font-weight:700;color:var(--g6)">70%</div><div style="font-size:11.5px;color:var(--t2)">Tech roles are remote-eligible</div></div>
+            <div style="padding:14px;background:var(--g0);border-radius:var(--rs)"><div style="font-size:20px;font-weight:700;color:var(--g6)">3x</div><div style="font-size:11.5px;color:var(--t2)">Remote vs local salary gap</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="chd"><span class="ctit">In-Demand Skills Globally (2025)</span></div>
+        <div class="cbd">
+          <div id="globalSkillBars"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card"><div class="chd"><span class="ctit">Nigeria vs Africa: Career Landscape</span></div>
+      <div class="cbd">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center">
+          <div><div style="font-size:22px;font-weight:700;color:var(--g6)">&#35;1</div><div style="font-size:12px;color:var(--t2)">Largest tech talent pool in Africa</div></div>
+          <div><div style="font-size:22px;font-weight:700;color:var(--g6)">60%</div><div style="font-size:12px;color:var(--t2)">Of Africa's FinTech startups are Nigerian</div></div>
+          <div><div style="font-size:22px;font-weight:700;color:var(--g6)">&#36;4.8B</div><div style="font-size:12px;color:var(--t2)">Nigerian tech sector valuation 2024</div></div>
+          <div><div style="font-size:22px;font-weight:700;color:var(--gd)">200M+</div><div style="font-size:12px;color:var(--t2)">Population = massive domestic market</div></div>
+          <div><div style="font-size:22px;font-weight:700;color:var(--gd)">45%</div><div style="font-size:12px;color:var(--t2)">Youth population under 25</div></div>
+          <div><div style="font-size:22px;font-weight:700;color:var(--gd)">500+</div><div style="font-size:12px;color:var(--t2)">Active tech startups in Lagos alone</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:22px"><div class="cbd" style="text-align:center;padding:24px">
+    <div style="font-family:DM Serif Display,serif;font-size:17px;color:var(--g8);margin-bottom:6px">Ready to align your career to market demand?</div>
+    <button class="btn bg blg" onclick="go('recommend')">&#9733; Get My Career Recommendations</button>
+  </div></div>
+</div>
+
+<!-- SAVED -->
+<div class="pg" id="pg-saved">
+  <div class="ph"><h1>Saved Careers</h1><p>Your bookmarked careers for quick reference.</p></div>
+  <div id="savedGrid">
+    <div class="es" style="background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:70px">
+      <div class="esic">&#9825;</div><h3>No saved careers yet</h3>
+      <button class="btn bp mt12" onclick="go('careers')">Explore Careers</button>
+    </div>
+  </div>
+</div>
+
+<!-- WISDOM -->
+<div class="pg" id="pg-wisdom">
+  <div class="ph"><h1>Wisdom Hub</h1><p>50 motivational quotes curated by Emmyxoxo for Nigerian students.</p></div>
+  <div class="fb mb22">
+    <button class="fchip on" onclick="filterWis('all',this)">All Quotes</button>
+    <button class="fchip" onclick="filterWis('emmy',this)">By Emmyxoxo</button>
+  </div>
+  <div class="wgrid" id="wisGrid"></div>
+</div>
+
+<!-- FAQ -->
+<div class="pg" id="pg-faq">
+  <div class="ph"><h1>Help &amp; FAQ</h1><p>Common questions about PathPilot v4.0.</p></div>
+  <div id="faqBody"></div>
+  <div style="text-align:center;padding:22px;background:var(--g0);border:1px solid var(--g1);border-radius:var(--r);margin-top:8px">
+    <p style="font-size:13px;color:var(--t2);margin-bottom:13px">Take the quiz for personalised guidance.</p>
+    <button class="btn bg" onclick="go('recommend')">&#9733; Take Career Quiz</button>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="pg" id="pg-profile">
+  <div class="ph"><h1>My Profile</h1><p>Optionally set a display name and profile photo. No account needed.</p></div>
+  <div class="two">
+    <div>
+      <div class="card mb16" style="text-align:center;padding:28px 20px">
+        <div class="pava" id="pAva" onclick="document.getElementById('avFile').click()">
+          <span id="pAvaTxt">E</span><div class="pcam">&#128247;</div>
+        </div>
+        <input type="file" id="avFile" accept="image/*" style="display:none" onchange="handleAv(this)">
+        <div style="font-size:10.5px;color:var(--tm);margin-bottom:14px">Click photo to upload (max 2MB)</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--g9)" id="pName">Emmy xoxo</div>
+        <div style="font-size:12px;color:var(--tm)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="67141312030209132704000e14490900">[email&#160;protected]</a></div>
+        <span class="tag tg" style="margin-top:8px">Student</span>
+      </div>
+      <div class="card"><div class="cbd" style="padding:14px">
+        <div class="fbw" style="padding:9px 0;border-bottom:1px solid var(--bd)">
+          <span style="font-size:13px;color:var(--t2)">Saved Careers</span>
+          <strong style="color:var(--g7)" id="p-sc">0</strong>
+        </div>
+        <div class="fbw" style="padding:9px 0;border-bottom:1px solid var(--bd)">
+          <span style="font-size:13px;color:var(--t2)">Recommendations</span>
+          <strong style="color:var(--g7)" id="p-rc">0</strong>
+        </div>
+        <div class="fbw" style="padding:9px 0">
+          <span style="font-size:13px;color:var(--t2)">Member Since</span>
+          <span style="font-size:12.5px">Jan 2025</span>
+        </div>
+      </div></div>
+    </div>
+    <div class="card"><div class="cbd">
+      <div style="font-family:'DM Serif Display',serif;font-size:17px;color:var(--g8);margin-bottom:18px">Edit Profile</div>
+      <div class="fg"><label class="fl">Full Name</label>
+        <input type="text" class="fc" id="pfNm" placeholder="Your full name">
+        <div class="fhint">Appears in topbar and sidebar throughout the system</div>
+      </div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap">
+        <button class="btn bp" style="flex:1;justify-content:center" onclick="saveProf()">Save Changes</button>
+        <button class="btn bg" style="flex:1;justify-content:center" onclick="go('recommend')">&#9733; Update Recs</button>
+      </div>
+    </div></div>
+  </div>
+</div>
+  </div></div><!-- /pgc /pgwrap -->
+  <footer class="footer">
+    <div class="fleft">
+      <!-- <span class="flogo">&#10045;</span> -->
+      <div>
+        <!-- <div class="fbrand">PathPilot v4.0</div> -->
+      <!-- <div class="fsub">Founder &amp; Developer: <strong class="femmy">Emmyxoxo</strong> &bull; Free public access</div> -->
+    </div>
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,.25)">Career Guidance Information System &copy; 2026</div>
+    <div style="display:flex;gap:14px">
+      <a onclick="go('careers')" style="color:rgba(255,255,255,.35);cursor:pointer">Careers</a>
+      <a onclick="go('courses')" style="color:rgba(255,255,255,.35);cursor:pointer">Courses</a>
+      <a onclick="go('subjects')" style="color:rgba(255,255,255,.35);cursor:pointer">Subjects</a>
+      <a onclick="go('skills')" style="color:rgba(255,255,255,.35);cursor:pointer">Skills</a>
+    </div>
+  </footer>
+</div></div>
+<div class="toasts" id="toasts"></div>
+<script>
+
+
+
+
+
+
+'use strict';
+var S={name:"Explorer",avatar:null,saved:[],recs:[]};
+var PAGES=["dashboard","careers","cardet","courses","codet","subjects","subdet","skills","skdet","recommend","compare","quiz","market","saved","wisdom","faq","profile"];
+var TITLES={dashboard:"Dashboard",careers:"Explore Careers",cardet:"Career Detail",courses:"Courses",codet:"Course Detail",subjects:"Subjects",subdet:"Subject Detail",skills:"Skills Guide",skdet:"Skill Detail",recommend:"Recommendations",compare:"Compare Careers",quiz:"Career Quiz",market:"Market Insights",saved:"Saved Careers",wisdom:"Wisdom Hub",faq:"Help & FAQ",profile:"My Profile"};
+
+var QUOTES=[
+{t:"Your future is created by what you do today, not tomorrow.",a:"Emmy xoxo"},
+{t:"Success begins with the right career choice.",a:"Emmy xoxo"},
+{t:"Follow your passion, but always plan your path.",a:"Emmy xoxo"},
+{t:"Skills open doors; knowledge keeps them open.",a:"Emmy xoxo"},
+{t:"Nigeria has the talent. You are that talent. Own your future.",a:"Emmy xoxo"},
+{t:"Career success is rented, not owned. The rent is due every day.",a:"Emmy xoxo"},
+{t:"Do not wait for opportunity. Create it.",a:"Emmy xoxo"},
+{t:"Push yourself because no one else will do it for you.",a:"Emmy xoxo"},
+{t:"Great things never come from comfort zones.",a:"Emmy xoxo"},
+{t:"Build your skills today; they will build your future tomorrow.",a:"Emmy xoxo"},
+{t:"In Nigeria or anywhere, excellence has no substitute.",a:"Emmy xoxo"},
+{t:"Your career is not just what you do - it is who you become.",a:"Emmy xoxo"},
+{t:"Study while others are sleeping. Work while others are loafing.",a:"Emmy xoxo"},
+{t:"It is going to be hard, but hard does not mean impossible.",a:"Emmy xoxo"},
+{t:"The key to success is to focus on goals, not obstacles.",a:"Emmy xoxo"},
+{t:"Your limitation is only your imagination.",a:"Emmy xoxo"},
+{t:"Sometimes later becomes never. Do it now.",a:"Emmy xoxo"},
+{t:"Dream it. Wish it. Do it. Every day.",a:"Emmy xoxo"},
+{t:"Little things make big days.",a:"Emmy xoxo"},
+{t:"Wake up with determination. Go to bed with satisfaction.",a:"Emmy xoxo"},
+{t:"Choose a job you love and you will never work a day in your life.",a:"Confucius"},
+{t:"The future belongs to those who believe in the beauty of their dreams.",a:"Eleanor Roosevelt"},
+{t:"Education is the most powerful weapon to change the world.",a:"Nelson Mandela"},
+{t:"The only way to do great work is to love what you do.",a:"Steve Jobs"},
+{t:"Hard work beats talent when talent does not work hard.",a:"Tim Notke"},
+{t:"An investment in knowledge pays the best interest.",a:"Benjamin Franklin"},
+{t:"Believe you can and you are halfway there.",a:"Theodore Roosevelt"},
+{t:"The secret of getting ahead is getting started.",a:"Mark Twain"},
+{t:"It always seems impossible until it is done.",a:"Nelson Mandela"},
+{t:"Dream big. Start small. Act now.",a:"Robin Sharma"},
+{t:"Opportunities do not happen. You create them.",a:"Chris Grosser"},
+{t:"Do something today that your future self will thank you for.",a:"Sean Patrick Flanery"},
+{t:"Success is walking from failure to failure with no loss of enthusiasm.",a:"Winston Churchill"},
+{t:"The best time to plant a tree was 20 years ago. The second best is now.",a:"Chinese Proverb"},
+{t:"Be the change you wish to see in the world.",a:"Mahatma Gandhi"},
+{t:"All our dreams can come true if we have the courage to pursue them.",a:"Walt Disney"},
+{t:"Education is not the filling of a bucket, but the lighting of a fire.",a:"W.B. Yeats"},
+{t:"The expert in anything was once a beginner.",a:"Helen Hayes"},
+{t:"The best way to predict the future is to create it.",a:"Abraham Lincoln"},
+{t:"In the middle of every difficulty lies opportunity.",a:"Albert Einstein"},
+{t:"I have not failed. I have found 10,000 ways that won't work.",a:"Thomas Edison"},
+{t:"It does not matter how slowly you go as long as you do not stop.",a:"Confucius"},
+{t:"Stay focused, go after your dreams and keep moving toward your goals.",a:"LL Cool J"},
+{t:"You are never too old to set another goal or dream a new dream.",a:"C.S. Lewis"},
+{t:"Success is the sum of small efforts repeated day in and day out.",a:"Robert Collier"},
+{t:"Don't watch the clock. Do what it does. Keep going.",a:"Sam Levenson"},
+{t:"The harder I work, the luckier I get.",a:"Samuel Goldwyn"},
+{t:"A year from now you may wish you had started today.",a:"Karen Lamb"},
+{t:"Do what you have to do until you can do what you want to do.",a:"Oprah Winfrey"}
+];
+
+var CAREERS=[
+{id:1,title:"Software Developer",cat:"Technology",str:"science",sal:"N200K-N900K/month",desc:"Designs, builds and maintains software applications across web, mobile and enterprise platforms.",opp:"Flutterwave, Interswitch, Andela, banks, telecoms, startups, remote global roles.",courses:["Computer Science","Software Engineering","Information Technology"],st:["Programming (Python/Java/JS)","Database Design and SQL"],ss:["Problem Solving","Attention to Detail"],subj:["Mathematics","Physics","Computer Studies"]},
+{id:2,title:"Data Scientist",cat:"Technology",str:"science",sal:"N200K-N700K/month",desc:"Collects, cleans and analyses datasets using statistics and machine learning to generate insights.",opp:"Banks, telecoms, Cowrywise, Piggyvest, NGOs, consulting firms.",courses:["Data Science","Statistics","Computer Science"],st:["Data Analysis and Visualisation","Machine Learning"],ss:["Research and Information Literacy","Problem Solving"],subj:["Mathematics","Further Mathematics","Physics"]},
+{id:3,title:"Cybersecurity Analyst",cat:"Technology",str:"science",sal:"N250K-N800K/month",desc:"Protects digital infrastructure from cyberattacks and implements security controls.",opp:"Banks, NITDA, EFCC, telecoms, multinationals, government agencies.",courses:["Cybersecurity","Computer Science","Information Technology"],st:["Cybersecurity and Ethical Hacking","Network Administration"],ss:["Attention to Detail","Ethical Reasoning"],subj:["Mathematics","Physics","Computer Studies"]},
+{id:4,title:"Network Engineer",cat:"Technology",str:"science",sal:"N150K-N500K/month",desc:"Plans, builds and maintains computer networks including LAN, WAN and wireless systems.",opp:"MTN, Airtel, Glo, government IT agencies, banks, multinationals.",courses:["Information Technology","Computer Science"],st:["Network Administration","Cybersecurity"],ss:["Problem Solving","Attention to Detail"],subj:["Mathematics","Physics"]},
+{id:5,title:"UI/UX Designer",cat:"Technology",str:"science",sal:"N150K-N550K/month",desc:"Creates intuitive user interfaces and smooth digital experiences through research and prototyping.",opp:"Fintech startups, media companies, design agencies, e-commerce, freelancing.",courses:["Computer Science","Fine and Applied Arts"],st:["UI/UX Design","Graphic Design"],ss:["Creativity and Innovation","Empathy"],subj:["Fine Art","Mathematics"]},
+{id:6,title:"Medical Doctor",cat:"Healthcare",str:"science",sal:"N300K-N800K/month",desc:"Diagnoses and treats illness, injuries and diseases across hospital and community health settings.",opp:"LUTH, ABUTH, UCH, private hospitals, NCDC, WHO Nigeria, military hospitals.",courses:["Medicine and Surgery"],st:["Clinical Diagnosis and Treatment"],ss:["Communication","Empathy and Interpersonal Skills"],subj:["Biology","Chemistry","Physics","Mathematics"]},
+{id:7,title:"Pharmacist",cat:"Healthcare",str:"science",sal:"N150K-N450K/month",desc:"Dispenses medications, counsels patients on drug use and manages pharmaceutical services.",opp:"Community pharmacies, NAFDAC, hospitals, pharmaceutical companies.",courses:["Pharmacy"],st:["Drug Dispensing and Pharmacovigilance"],ss:["Attention to Detail","Communication"],subj:["Chemistry","Biology","Physics","Mathematics"]},
+{id:8,title:"Nurse",cat:"Healthcare",str:"science",sal:"N60K-N250K/month",desc:"Provides direct patient care, administers medications and monitors health outcomes.",opp:"Federal and state hospitals, private clinics, NGOs, international health organisations.",courses:["Nursing Science"],st:["Clinical Diagnosis and Treatment"],ss:["Empathy","Teamwork"],subj:["Biology","Chemistry","Mathematics"]},
+{id:9,title:"Civil Engineer",cat:"Engineering",str:"science",sal:"N120K-N500K/month",desc:"Designs and supervises construction of roads, bridges, dams, buildings and urban infrastructure.",opp:"Julius Berger, Setraco, FERMA, state ministries of works, NNPC.",courses:["Civil Engineering","Structural Engineering"],st:["AutoCAD and Engineering Drawing","Structural Design"],ss:["Problem Solving","Attention to Detail"],subj:["Mathematics","Physics","Further Mathematics"]},
+{id:10,title:"Petroleum Engineer",cat:"Engineering",str:"science",sal:"N350K-N1.5M/month",desc:"Designs and optimises methods for extracting oil and gas from reservoirs safely.",opp:"NNPC, Shell, ExxonMobil, Total, Chevron, NAOC.",courses:["Petroleum Engineering","Chemical Engineering"],st:["AutoCAD and Engineering Drawing"],ss:["Problem Solving","Ethical Reasoning"],subj:["Mathematics","Physics","Chemistry"]},
+{id:11,title:"Electrical Engineer",cat:"Engineering",str:"science",sal:"N130K-N550K/month",desc:"Designs electrical power systems, electronics, control systems and telecommunications infrastructure.",opp:"TCN, electricity distribution companies, Siemens Nigeria, oil and gas.",courses:["Electrical and Electronics Engineering"],st:["AutoCAD and Engineering Drawing"],ss:["Problem Solving","Attention to Detail"],subj:["Mathematics","Physics","Further Mathematics"]},
+{id:12,title:"Mechanical Engineer",cat:"Engineering",str:"science",sal:"N120K-N500K/month",desc:"Designs and maintains mechanical systems including engines, turbines and manufacturing equipment.",opp:"NNPC, manufacturing firms, Peugeot Nigeria, power plants.",courses:["Mechanical Engineering","Mechatronics Engineering"],st:["AutoCAD and Engineering Drawing"],ss:["Problem Solving","Attention to Detail"],subj:["Mathematics","Physics","Further Mathematics"]},
+{id:13,title:"Accountant",cat:"Finance",str:"commercial",sal:"N100K-N600K/month",desc:"Prepares and audits financial records, ensures tax compliance and supports financial planning.",opp:"KPMG, Deloitte, PwC, EY Nigeria, CBN, FIRS, all corporations.",courses:["Accounting","Accountancy Technology"],st:["Financial Accounting and Reporting"],ss:["Attention to Detail","Ethical Reasoning"],subj:["Mathematics","Economics","Accounting"]},
+{id:14,title:"Banker / Finance Officer",cat:"Finance",str:"commercial",sal:"N80K-N500K/month",desc:"Manages deposits, loans, investments and financial products in retail and corporate banking.",opp:"GTB, Zenith, Access, First Bank, UBA, microfinance banks.",courses:["Banking and Finance","Accounting"],st:["Financial Accounting and Reporting"],ss:["Communication","Negotiation and Persuasion"],subj:["Mathematics","Economics","Commerce"]},
+{id:15,title:"Economist",cat:"Finance",str:"commercial",sal:"N150K-N700K/month",desc:"Analyses economic data, models market behaviour and advises governments and businesses on policy.",opp:"CBN, NBS, World Bank, IMF, Finance Ministry, research institutes.",courses:["Economics","Economics and Statistics"],st:["Data Analysis and Visualisation"],ss:["Research and Information Literacy","Strategic Thinking"],subj:["Economics","Mathematics","Geography"]},
+{id:16,title:"Entrepreneur",cat:"Finance",str:"commercial",sal:"Variable",desc:"Identifies market opportunities, builds businesses and creates economic value and employment.",opp:"Self-employment across all sectors - tech, agri, fashion, media.",courses:["Business Administration","Entrepreneurship"],st:["Digital Marketing and SEO"],ss:["Leadership and Decision Making","Creativity"],subj:["Economics","Commerce","Mathematics"]},
+{id:17,title:"Lawyer",cat:"Law",str:"art",sal:"N100K-N700K/month",desc:"Advises clients on legal matters, drafts legal documents and represents parties in court.",opp:"NBA chambers, corporate legal departments, EFCC, ICPC, judiciary.",courses:["Law"],st:["Legal Research and Drafting"],ss:["Communication","Negotiation and Persuasion"],subj:["English Language","Government","Literature in English"]},
+{id:18,title:"Diplomat",cat:"Law",str:"art",sal:"N200K-N700K/month",desc:"Represents Nigeria abroad, negotiates treaties and manages bilateral relations with other countries.",opp:"Ministry of Foreign Affairs, Nigerian embassies, UN missions, ECOWAS.",courses:["International Studies and Diplomacy","Law"],st:["Legal Research and Drafting"],ss:["Cultural Awareness","Negotiation"],subj:["English Language","Government","French"]},
+{id:19,title:"Journalist / Reporter",cat:"Media",str:"art",sal:"N60K-N350K/month",desc:"Investigates stories, interviews sources and presents news across print, broadcast and digital media.",opp:"NTA, Channels TV, Punch, The Guardian, Vanguard, BBC Africa.",courses:["Mass Communication","English and Literary Studies"],st:["Content Creation and Copywriting"],ss:["Research and Information Literacy","Communication"],subj:["English Language","Literature in English","Government"]},
+{id:20,title:"Film Director / Producer",cat:"Media",str:"art",sal:"N100K-N1M+/month",desc:"Leads the creative and production process for films, TV shows, commercials and digital content.",opp:"Nollywood studios, NTA, streaming platforms, advertising agencies.",courses:["Theatre and Performing Arts","Mass Communication"],st:["Video Production and Editing"],ss:["Creativity","Leadership"],subj:["English Language","Literature in English","Fine Art"]},
+{id:21,title:"Fashion Designer",cat:"Media",str:"art",sal:"N80K-N600K/month",desc:"Designs clothing, accessories and fashion collections for clients and commercial markets.",opp:"Fashion houses, retail brands, self-employment, export market.",courses:["Fashion Design and Clothing Technology","Fine and Applied Arts"],st:["Graphic Design"],ss:["Creativity","Attention to Detail"],subj:["Fine Art"]},
+{id:22,title:"Teacher / Lecturer",cat:"Education",str:"art",sal:"N45K-N700K/month",desc:"Plans and delivers lessons, assesses students and supports learning at secondary or tertiary level.",opp:"Public and private schools, universities, polytechnics, international schools.",courses:["Education (English)","Education (Mathematics)","Education (Science)"],st:["Content Creation and Copywriting"],ss:["Communication","Mentoring and Coaching"],subj:["English Language","Mathematics"]},
+{id:23,title:"Social Worker",cat:"Education",str:"art",sal:"N50K-N250K/month",desc:"Helps individuals, families and communities overcome challenges including poverty and mental health.",opp:"Ministry of Social Development, NGOs, hospitals, schools, prisons.",courses:["Social Work","Sociology","Psychology"],st:["Content Creation and Copywriting"],ss:["Empathy","Conflict Resolution"],subj:["English Language","Government","Biology"]},
+{id:24,title:"Geologist",cat:"Science",str:"science",sal:"N150K-N700K/month",desc:"Studies the Earth to locate mineral resources and assess natural hazards.",opp:"NNPC, solid minerals sector, environmental agencies, universities.",courses:["Geology","Geography and Environmental Management"],st:["Laboratory Testing and Analysis"],ss:["Research","Attention to Detail"],subj:["Physics","Chemistry","Geography","Mathematics"]},
+{id:25,title:"Architect",cat:"Engineering",str:"science",sal:"N100K-N500K/month",desc:"Designs buildings and spaces combining structural integrity, functionality and aesthetics.",opp:"Design firms, FCTA, state urban planning agencies, private clients.",courses:["Architecture"],st:["AutoCAD and Engineering Drawing"],ss:["Creativity","Attention to Detail"],subj:["Mathematics","Physics","Fine Art"]},
+{id:26,title:"Biochemist",cat:"Science",str:"science",sal:"N80K-N400K/month",desc:"Studies chemical processes within living organisms to support drug development and diagnostics.",opp:"Pharmaceutical companies, hospitals, research institutes, universities.",courses:["Biochemistry"],st:["Laboratory Testing and Analysis"],ss:["Research","Attention to Detail"],subj:["Chemistry","Biology","Mathematics"]},
+{id:27,title:"Public Health Officer",cat:"Healthcare",str:"science",sal:"N100K-N400K/month",desc:"Plans and implements disease prevention and health promotion programmes at community level.",opp:"Ministry of Health, NCDC, WHO, UNICEF, local government.",courses:["Public Health","Medicine and Surgery"],st:["Clinical Diagnosis and Treatment"],ss:["Communication","Leadership"],subj:["Biology","Chemistry","Mathematics"]},
+{id:28,title:"Urban Planner",cat:"Engineering",str:"science",sal:"N100K-N500K/month",desc:"Plans land use and design of urban environments to create sustainable and liveable cities.",opp:"FCTA, state urban planning agencies, consulting firms, NGOs.",courses:["Urban and Regional Planning","Architecture","Civil Engineering"],st:["AutoCAD and Engineering Drawing"],ss:["Strategic Thinking","Research"],subj:["Mathematics","Geography","Fine Art"]},
+{id:29,title:"Human Resources Manager",cat:"Finance",str:"commercial",sal:"N100K-N500K/month",desc:"Oversees recruitment, employee relations, training, compensation and organisational culture.",opp:"All organisations with more than 20 employees - multinationals, banks, NGOs.",courses:["Human Resource Management","Business Administration"],st:["Financial Accounting and Reporting"],ss:["Communication","Leadership","Empathy"],subj:["Mathematics","Economics","Commerce"]},
+{id:30,title:"Marketing Manager",cat:"Finance",str:"commercial",sal:"N100K-N500K/month",desc:"Develops and executes strategies to promote products, grow market share and build brand equity.",opp:"All consumer-facing companies - FMCG, banks, telecoms, tech.",courses:["Marketing","Business Administration","Mass Communication"],st:["Digital Marketing and SEO","Content Creation and Copywriting"],ss:["Creativity","Communication","Strategic Thinking"],subj:["Economics","Commerce","English Language"]}
+];
+
+var COURSES=[
+{id:1,name:"Computer Science",fac:"Computing",dur:"4 years",lvl:"BSc",str:"science",desc:"Algorithms, programming, software engineering, AI and computing theory.",careers:["Software Developer","Data Scientist","Cybersecurity Analyst"],subj:["Mathematics","Physics","Computer Studies"]},
+{id:2,name:"Medicine and Surgery",fac:"Medicine",dur:"6 years",lvl:"MBBS",str:"science",desc:"Clinical medicine, surgery, anatomy, physiology and medical ethics.",careers:["Medical Doctor","Surgeon","Radiologist"],subj:["Biology","Chemistry","Physics","Mathematics"]},
+{id:3,name:"Law",fac:"Law",dur:"5 years",lvl:"LLB",str:"art",desc:"Nigerian law, constitutional law, contract, tort, criminal law and jurisprudence.",careers:["Lawyer","Judge","Diplomat"],subj:["English Language","Government","Literature in English"]},
+{id:4,name:"Accounting",fac:"Management Sciences",dur:"4 years",lvl:"BSc",str:"commercial",desc:"Financial accounting, auditing, taxation, management accounting and IFRS standards.",careers:["Accountant","Auditor","Tax Consultant"],subj:["Mathematics","Economics","Accounting"]},
+{id:5,name:"Electrical and Electronics Engineering",fac:"Engineering",dur:"5 years",lvl:"BEng",str:"science",desc:"Electrical circuits, power systems, electronics, control systems and telecommunications.",careers:["Electrical Engineer","Network Engineer","Broadcast Engineer"],subj:["Mathematics","Physics","Further Mathematics"]},
+{id:6,name:"Mass Communication",fac:"Communication",dur:"4 years",lvl:"BSc",str:"art",desc:"Journalism, broadcasting, public relations, advertising and media studies.",careers:["Journalist","PR Specialist","Content Creator"],subj:["English Language","Literature in English"]},
+{id:7,name:"Economics",fac:"Social Sciences",dur:"4 years",lvl:"BSc",str:"commercial",desc:"Microeconomics, macroeconomics, econometrics and economic policy analysis.",careers:["Economist","Financial Analyst","Policy Analyst"],subj:["Mathematics","Economics","Geography"]},
+{id:8,name:"Architecture",fac:"Environmental Design",dur:"5 years",lvl:"BArch",str:"science",desc:"Architectural design, building technology, urban planning and sustainable construction.",careers:["Architect","Urban Planner","Interior Decorator"],subj:["Mathematics","Physics","Fine Art"]},
+{id:9,name:"Pharmacy",fac:"Pharmacy",dur:"5 years",lvl:"B.Pharm",str:"science",desc:"Pharmaceutical chemistry, pharmacology, drug formulation and clinical pharmacy.",careers:["Pharmacist","Drug Researcher"],subj:["Chemistry","Biology","Physics","Mathematics"]},
+{id:10,name:"Civil Engineering",fac:"Engineering",dur:"5 years",lvl:"BEng",str:"science",desc:"Structural analysis, transportation, hydraulics and construction management.",careers:["Civil Engineer","Structural Engineer","Urban Planner"],subj:["Mathematics","Physics","Further Mathematics"]},
+{id:11,name:"Banking and Finance",fac:"Management Sciences",dur:"4 years",lvl:"BSc",str:"commercial",desc:"Financial institutions, investment banking, monetary policy and risk management.",careers:["Banker","Investment Analyst","Financial Planner"],subj:["Mathematics","Economics","Commerce"]},
+{id:12,name:"Nursing Science",fac:"Medicine",dur:"4 years",lvl:"BSc",str:"science",desc:"Clinical nursing, patient care, midwifery and public health nursing.",careers:["Nurse","Midwife","Public Health Nurse"],subj:["Biology","Chemistry","Mathematics"]},
+{id:13,name:"Business Administration",fac:"Management Sciences",dur:"4 years",lvl:"BSc",str:"commercial",desc:"Management, organisational behaviour, operations, marketing and strategy.",careers:["Business Manager","HR Manager","Entrepreneur"],subj:["Mathematics","Economics","Commerce"]},
+{id:14,name:"Petroleum Engineering",fac:"Engineering",dur:"5 years",lvl:"BEng",str:"science",desc:"Reservoir engineering, drilling, production optimisation and petroleum economics.",careers:["Petroleum Engineer","Reservoir Engineer"],subj:["Mathematics","Physics","Chemistry"]},
+{id:15,name:"Fine and Applied Arts",fac:"Arts",dur:"4 years",lvl:"BFA",str:"art",desc:"Studio art, painting, sculpture, printmaking and applied design.",careers:["Graphic Designer","Visual Artist","Art Teacher","Animator"],subj:["Fine Art","Literature in English"]},
+{id:16,name:"Data Science",fac:"Computing",dur:"4 years",lvl:"BSc",str:"science",desc:"Statistical modelling, machine learning, data visualisation and big data systems.",careers:["Data Scientist","AI Engineer","Business Analyst"],subj:["Mathematics","Physics","Computer Studies"]},
+{id:17,name:"Psychology",fac:"Social Sciences",dur:"4 years",lvl:"BSc",str:"art",desc:"Cognitive, developmental, clinical and industrial psychology and research methods.",careers:["Psychologist","HR Specialist","Mental Health Counsellor"],subj:["English Language","Biology"]},
+{id:18,name:"Cybersecurity",fac:"Computing",dur:"4 years",lvl:"BSc",str:"science",desc:"Digital security, ethical hacking, network defence, cryptography and compliance.",careers:["Cybersecurity Analyst","Network Engineer"],subj:["Mathematics","Physics","Computer Studies"]},
+{id:19,name:"International Studies and Diplomacy",fac:"Social Sciences",dur:"4 years",lvl:"BSc",str:"art",desc:"International relations, diplomatic protocol, global governance and foreign policy.",careers:["Diplomat","Foreign Affairs Officer"],subj:["English Language","Government","French"]},
+{id:20,name:"Political Science",fac:"Social Sciences",dur:"4 years",lvl:"BSc",str:"art",desc:"Government systems, comparative politics, international relations and political theory.",careers:["Politician","Diplomat","Policy Analyst"],subj:["English Language","Government"]}
+];
+
+var SUBJECTS=[
+{id:1,name:"English Language",cat:"core",comp:true,desc:"Compulsory for all JAMB candidates. Tests reading, writing and comprehension skills.",courses:["Law","Mass Communication","English and Literary Studies","All university courses"],careers:["Lawyer","Journalist","Diplomat","Teacher"]},
+{id:2,name:"Mathematics",cat:"core",comp:false,desc:"Required for science, engineering, commerce and technology courses.",courses:["Computer Science","Accounting","Economics","Civil Engineering","Data Science"],careers:["Software Developer","Accountant","Engineer","Economist"]},
+{id:3,name:"Physics",cat:"science",comp:false,desc:"Fundamental for engineering, physical sciences and technology.",courses:["Civil Engineering","Computer Science","Medicine and Surgery","Pharmacy"],careers:["Engineer","Physicist","Petroleum Engineer"]},
+{id:4,name:"Chemistry",cat:"science",comp:false,desc:"Required for medicine, pharmacy, chemical engineering and related sciences.",courses:["Medicine and Surgery","Pharmacy","Chemical Engineering","Biochemistry"],careers:["Medical Doctor","Pharmacist","Chemical Engineer"]},
+{id:5,name:"Biology",cat:"science",comp:false,desc:"Essential for medicine, nursing, pharmacy and biological sciences.",courses:["Medicine and Surgery","Nursing Science","Pharmacy","Veterinary Medicine"],careers:["Medical Doctor","Nurse","Pharmacist","Biologist"]},
+{id:6,name:"Economics",cat:"commercial",comp:false,desc:"Core for business, accounting, banking and social sciences.",courses:["Accounting","Banking and Finance","Business Administration","Economics"],careers:["Economist","Accountant","Banker","Business Manager"]},
+{id:7,name:"Government",cat:"art",comp:false,desc:"Required for law, political science and public administration.",courses:["Law","Political Science","International Studies and Diplomacy"],careers:["Lawyer","Politician","Diplomat","Public Administrator"]},
+{id:8,name:"Literature in English",cat:"art",comp:false,desc:"Required for English, mass communication and law courses.",courses:["Law","Mass Communication","English and Literary Studies"],careers:["Lawyer","Journalist","Teacher","Librarian"]},
+{id:9,name:"Further Mathematics",cat:"science",comp:false,desc:"Advanced mathematics for engineering, computer science and mathematical sciences.",courses:["Computer Science","Data Science","Statistics","Civil Engineering"],careers:["Software Developer","Data Scientist","Actuary","Electrical Engineer"]},
+{id:10,name:"Agricultural Science",cat:"science",comp:false,desc:"Required for agriculture, veterinary medicine and environmental science.",courses:["Agriculture (General)","Veterinary Medicine","Animal Science"],careers:["Agricultural Scientist","Veterinary Doctor","Farm Manager"]},
+{id:11,name:"Commerce",cat:"commercial",comp:false,desc:"Foundation for business-related courses. Covers trade and commercial activities.",courses:["Business Administration","Banking and Finance","Entrepreneurship"],careers:["Business Manager","Entrepreneur","Sales Manager"]},
+{id:12,name:"Accounting",cat:"commercial",comp:false,desc:"Direct pathway to accounting, finance and business courses.",courses:["Accounting","Accountancy Technology","Banking and Finance"],careers:["Accountant","Auditor","Financial Planner"]},
+{id:13,name:"Geography",cat:"art",comp:false,desc:"Relevant to environmental studies, urban planning, geology and social sciences.",courses:["Geology","Geography and Environmental Management","Urban and Regional Planning"],careers:["Geologist","Urban Planner","Environmental Scientist"]},
+{id:14,name:"Fine Art",cat:"art",comp:false,desc:"Required for graphic design, architecture, fine arts and visual communication.",courses:["Architecture","Fine and Applied Arts","Graphic Design Technology"],careers:["Architect","Graphic Designer","Animator","Fashion Designer"]},
+{id:15,name:"Technical Drawing",cat:"technical",comp:false,desc:"Essential for engineering, architecture and industrial design courses.",courses:["Civil Engineering","Architecture","Mechanical Engineering"],careers:["Architect","Civil Engineer","Mechanical Engineer"]},
+{id:16,name:"Computer Studies",cat:"technical",comp:false,desc:"Foundation for computer science, IT and related technology courses.",courses:["Computer Science","Information Technology","Cybersecurity"],careers:["Software Developer","Network Engineer","IT Support"]},
+{id:17,name:"French",cat:"art",comp:false,desc:"Useful for international relations, languages and diplomacy courses.",courses:["International Studies and Diplomacy","French Language and Communication"],careers:["Diplomat","Translator","International Business"]}
+];
+
+var ST=[
+{id:1,name:"Programming (Python/Java/JavaScript)",type:"technical",desc:"Writing clean, tested code in mainstream languages.",how:"Start at freeCodeCamp. Build 3 projects. Contribute to GitHub.",careers:["Software Developer","Data Scientist","AI Engineer"]},
+{id:2,name:"Data Analysis and Visualisation",type:"technical",desc:"Processing datasets using Excel, Python Pandas, R or Tableau.",how:"Learn Excel pivot tables first. Then Kaggle Python courses. Build dashboards.",careers:["Data Scientist","Economist","Statistician"]},
+{id:3,name:"Cybersecurity and Ethical Hacking",type:"technical",desc:"Penetration testing, SIEM monitoring and security frameworks.",how:"Get CompTIA Security+. Use Kali Linux. Practice on TryHackMe.",careers:["Cybersecurity Analyst","Network Engineer"]},
+{id:4,name:"UI/UX Design",type:"technical",desc:"Wireframing, prototyping and creating intuitive interfaces using Figma.",how:"Complete Google UX Certificate on Coursera. Redesign 3 Nigerian apps.",careers:["UI/UX Designer","Product Manager"]},
+{id:5,name:"Graphic Design (Adobe Suite)",type:"technical",desc:"Creating logos, layouts and brand materials using Illustrator and Photoshop.",how:"Learn on YouTube. Practice daily. Build 20-piece Behance portfolio.",careers:["Graphic Designer","Art Director"]},
+{id:6,name:"Clinical Diagnosis and Treatment",type:"technical",desc:"Systematic patient assessment, differential diagnosis and evidence-based treatment.",how:"Requires MBBS plus clinical rotations plus NYSC plus residency training.",careers:["Medical Doctor","Surgeon","Dentist"]},
+{id:7,name:"Financial Accounting and Reporting",type:"technical",desc:"Applying IFRS/GAAP to prepare financial statements and conduct audits.",how:"Study for ICAN. Practice with QuickBooks or Sage accounting software.",careers:["Accountant","Auditor","Financial Planner"]},
+{id:8,name:"AutoCAD and Engineering Drawing",type:"technical",desc:"Creating precise 2D/3D technical drawings for construction and design.",how:"Take AutoCAD course at COREN-accredited centre. Redraw building plans.",careers:["Civil Engineer","Architect","Mechanical Engineer"]},
+{id:9,name:"Digital Marketing and SEO",type:"technical",desc:"Google Ads, social media advertising, email campaigns and analytics.",how:"Complete Google Digital Skills for Africa (free). Run a small campaign.",careers:["Digital Marketer","Content Creator"]},
+{id:10,name:"Legal Research and Drafting",type:"technical",desc:"Finding relevant case law and drafting contracts, pleadings and opinions.",how:"Use LawPavilion and NigeriLaw databases. Join a law clinic.",careers:["Lawyer","Judge","Legal Adviser"]}
+];
+
+var SS=[
+{id:21,name:"Communication (Verbal and Written)",type:"soft",desc:"Expressing ideas clearly to diverse audiences in speech, writing and presentations.",how:"Join Toastmasters Nigeria. Write one article per week.",careers:["Journalist","Teacher","Diplomat","Lawyer"]},
+{id:22,name:"Leadership and Decision Making",type:"soft",desc:"Setting direction, motivating people and making sound decisions under pressure.",how:"Lead a community project. Read Leaders Eat Last by Simon Sinek.",careers:["Business Manager","Principal","Politician"]},
+{id:23,name:"Problem Solving and Critical Thinking",type:"soft",desc:"Analysing complex situations logically and developing practical solutions.",how:"Practice case competitions. Study consulting frameworks.",careers:["Engineer","Lawyer","Software Developer"]},
+{id:24,name:"Teamwork and Collaboration",type:"soft",desc:"Contributing effectively to group goals and managing shared tasks.",how:"Join team projects deliberately. Practice active listening in every meeting.",careers:["All careers benefit from teamwork"]},
+{id:25,name:"Creativity and Innovation",type:"soft",desc:"Generating original ideas and developing novel solutions that create value.",how:"Brainstorm 10 ideas for one problem daily. Study design thinking.",careers:["Graphic Designer","Entrepreneur","Architect"]},
+{id:26,name:"Time Management and Organisation",type:"soft",desc:"Prioritising high-value tasks and meeting deadlines consistently.",how:"Use Google Calendar. Apply Eisenhower Matrix. Try Pomodoro technique.",careers:["Project Manager","Accountant","Surgeon"]},
+{id:27,name:"Empathy and Interpersonal Skills",type:"soft",desc:"Understanding others emotional states and building genuine relationships.",how:"Practice active listening. Read Emotional Intelligence by Daniel Goleman.",careers:["Doctor","Nurse","Social Worker","Counsellor"]},
+{id:28,name:"Research and Information Literacy",type:"soft",desc:"Finding, evaluating and synthesising reliable information from credible sources.",how:"Use Google Scholar and ResearchGate. Learn Boolean search operators.",careers:["Journalist","Scientist","Lawyer","Lecturer"]},
+{id:29,name:"Ethical Reasoning and Integrity",type:"soft",desc:"Making decisions aligned with professional codes of conduct even under pressure.",how:"Study your profession code of ethics. Discuss dilemmas with mentors.",careers:["Doctor","Lawyer","Accountant","Police Officer"]},
+{id:30,name:"Public Speaking and Presentation",type:"soft",desc:"Delivering compelling presentations with confidence and clarity.",how:"Join Toastmasters. Present at every opportunity. Watch TED talks.",careers:["Lawyer","Teacher","Politician","Journalist"]}
+];
+
+var QQS=[
+{q:"Which JAMB subject combination is required for Computer Science?",opts:["English, Maths, Physics, Chemistry","English, Maths, Physics, Any Science","English, Maths, Economics, Commerce","English, Biology, Chemistry, Physics"],a:1,exp:"Computer Science requires English Language, Mathematics, Physics, and any other Science subject."},
+{q:"Which body regulates engineering practice in Nigeria?",opts:["NBA","ICAN","COREN","NMC"],a:2,exp:"COREN (Council for the Regulation of Engineering in Nigeria) registers all engineers."},
+{q:"A B.Pharm degree qualifies you to be a?",opts:["Medical Doctor","Pharmacist","Medical Lab Scientist","Nurse"],a:1,exp:"Pharmacists hold a Bachelor of Pharmacy (B.Pharm) degree."},
+{q:"Commerce, Economics and Accounting best leads to?",opts:["Medicine","Petroleum Engineering","Banking and Finance","Architecture"],a:2,exp:"These commercial subjects align directly with Banking and Finance."},
+{q:"WAEC stands for?",opts:["West African Examination Council","West African Education Corps","West African Excellence Committee","West African Entry Certificate"],a:0,exp:"WAEC stands for West African Examinations Council."},
+{q:"Most critical skill for a Cybersecurity Analyst?",opts:["Video Editing","Network Administration and Ethical Hacking","Public Speaking","Fashion Design"],a:1,exp:"Cybersecurity Analysts primarily need network administration and ethical hacking skills."},
+{q:"Which Nigerian company employs Software Developers?",opts:["Julius Berger","Flutterwave","Dangote Sugar","NIMASA"],a:1,exp:"Flutterwave is a major Nigerian FinTech unicorn and a top employer of software engineers."},
+{q:"Duration of MBBS in Nigeria?",opts:["4 years","5 years","6 years","7 years"],a:2,exp:"MBBS takes 6 years in Nigerian universities, including clinical rotations."},
+{q:"Which subject is compulsory for ALL JAMB candidates?",opts:["Mathematics","Physics","English Language","Chemistry"],a:2,exp:"English Language is the only compulsory subject for ALL JAMB candidates."},
+{q:"Petroleum Engineers work mainly in which Nigerian sector?",opts:["Education","Oil and Gas","Fashion","Agriculture"],a:1,exp:"NNPC, Shell, Chevron, Total, and ExxonMobil are top employers of Petroleum Engineers."}
+];
+
+var SECTORS=[
+{n:"Financial Technology (FinTech)",g:"+28%",j:"82,000+",w:"CBN digital finance push, mobile payments boom"},
+{n:"Healthcare and Pharma",g:"+22%",j:"61,000+",w:"Population growth, NHIS expansion, telemedicine"},
+{n:"Technology and Software",g:"+25%",j:"94,000+",w:"Andela, Flutterwave, global remote hiring"},
+{n:"Agriculture Technology",g:"+35%",j:"210,000+",w:"Food security, Olam, IITA, government support"},
+{n:"Education Technology",g:"+18%",j:"28,000+",w:"Online learning boom, digital literacy push"},
+{n:"Energy and Oil and Gas",g:"+12%",j:"45,000+",w:"Dangote Refinery, LNG expansion, renewables"}
+];
+
+var SALARIES=[["Software Developer","N150K","N400K"],["Data Scientist","N180K","N500K"],["Cybersecurity Analyst","N200K","N550K"],["Medical Doctor","N250K","N600K"],["Pharmacist","N120K","N350K"],["Civil Engineer","N100K","N350K"],["Petroleum Engineer","N300K","N800K"],["Lawyer","N80K","N400K"],["Accountant","N80K","N350K"],["Journalist","N50K","N200K"]];
+
+var FAQS=[
+{cat:"Getting Started",icon:"&#128640;",qs:[
+  {q:"How do I use PathPilot?",a:"Go to Dashboard, take the Career Recommendations quiz to get personalised career matches, then explore individual career and course pages for detailed information."},
+  {q:"Who built PathPilot?",a:"PathPilot was founded and developed entirely by Emmyxoxo as a final-year project to solve career mismatch and course selection problems among Nigerian students."}
+]},
+{cat:"Careers and Courses",icon:"&#128218;",qs:[
+  {q:"What is the difference between a course and a subject?",a:"Subjects are secondary school topics you study (e.g. Mathematics, Physics). Courses are university or polytechnic programmes (e.g. Computer Science, Law, Accounting)."},
+  {q:"How are subjects linked to careers?",a:"Each subject links to courses, and each course links to careers. Click any subject to see which courses and careers require or recommend it."}
+]},
+{cat:"Recommendations",icon:"&#11088;",qs:[
+  {q:"How does the recommendation engine work?",a:"Rule-based scoring: stream match adds 30 points, each interest adds 20 points, each subject match adds 15 points. Top 12 scorers are shown as your recommendations."},
+  {q:"Can I redo the recommendations?",a:"Yes. Go to Recommendations, update your selections and click Generate again. Your results update instantly."}
+]},
+{cat:"Using the App",icon:"&#128187;",qs:[
+  {q:"Do I need to create an account?",a:"PathPilot is completely free and public. No account, no login, no signup needed. Just open the app and explore careers, courses, subjects and skills freely."},
+  {q:"How do I save a career?",a:"Click the Save button on any career card. Saved careers appear in your Saved Careers page and on the Dashboard. They are stored in your browser session."},
+  {q:"What is the Career Quiz for?",a:"The Career Quiz tests your knowledge of Nigerian career paths, JAMB requirements and professional bodies. It is for learning, not for gating any features."}
+]}
+];
+
+// ── HELPERS ──────────────────────────────────────────────────────
+function rq(){return QUOTES[Math.floor(Math.random()*QUOTES.length)];}
+function H(s){var d=document.createElement('div');d.textContent=String(s||'');return d.innerHTML;}
+function showToast(msg,t){
+  var el=document.createElement('div');
+  el.className='toast '+(t==='e'?'te':'ts');
+  el.innerHTML='<span>'+(t==='e'?'&#10005;':'&#10003;')+'</span> '+msg;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(function(){el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(function(){el.remove();},300);},3500);
+}
+function setQ(){var q=rq();var tx=document.getElementById('qtx');var au=document.getElementById('qau');if(tx)tx.textContent=q.t;if(au)au.textContent='— '+q.a;}
+
+// ── NAVIGATION ───────────────────────────────────────────────────
+var navStack=[];   // pages visited, most recent last (excludes current page)
+var curPage=null;  // page currently on screen
+function go(p,fromBack){
+  if(!fromBack && curPage && curPage!==p){
+    navStack.push(curPage);
+    if(navStack.length>30)navStack.shift(); // cap history size
+  }
+  curPage=p;
+  updateBackBtn();
+  PAGES.forEach(function(pg){
+    var el=document.getElementById('pg-'+pg);
+    if(el){el.style.display='none';el.classList.remove('act');}
+    var ni=document.getElementById('ni-'+pg);
+    if(ni)ni.classList.remove('act');
+  });
+  var tgt=document.getElementById('pg-'+p);
+  if(tgt){tgt.style.display='';tgt.classList.add('act');}
+  var ni=document.getElementById('ni-'+p);
+  if(ni)ni.classList.add('act');
+  var tt=document.getElementById('topTitle');
+  if(tt)tt.textContent=TITLES[p]||'';
+  window.scrollTo(0,0);
+  if(window.innerWidth<=768)closeSB();
+  setQ();
+  if(p==='dashboard')renderDash();
+  if(p==='careers')renderCars();
+  if(p==='courses')renderCos();
+  if(p==='subjects')renderSubs();
+  if(p==='skills')renderSks();
+  if(p==='market')renderMarket();
+  if(p==='wisdom')renderWis('all');
+  if(p==='faq')renderFaq();
+  if(p==='profile')renderProfile();
+  if(p==='compare')initCmp();
+  if(p==='quiz')startQuiz();
+  if(p==='saved')renderSaved();
+}
+
+// ── BACK NAVIGATION ──────────────────────────────────────────────
+// The dashboard is treated as home, so the back button never shows there.
+function goBack(){
+  if(!navStack.length){go('dashboard');return;}
+  var prev=navStack.pop();
+  go(prev,true);
+}
+function updateBackBtn(){
+  var b=document.getElementById('backBtn');
+  if(!b)return;
+  b.style.display=(curPage!=='dashboard')?'inline-flex':'none';
+}
+
+// ── SIDEBAR ──────────────────────────────────────────────────────
+var sbO=false;
+function openSB(){sbO=true;document.getElementById('sidebar').classList.add('open');document.getElementById('bkdrop').style.display='block';document.body.style.overflow='hidden';}
+function closeSB(){sbO=false;document.getElementById('sidebar').classList.remove('open');document.getElementById('bkdrop').style.display='none';document.body.style.overflow='';}
+document.getElementById('menuTog').addEventListener('click',function(e){e.stopPropagation();sbO?closeSB():openSB();});
+window.addEventListener('resize',function(){if(window.innerWidth>768)closeSB();});
+
+// ── USER / AVATAR ────────────────────────────────────────────────
+function updateUser(name,img){
+  S.name=name;
+  var first=name.split(' ')[0];
+  var ini=name.charAt(0).toUpperCase();
+  var sbNm=document.getElementById('sbNm');if(sbNm)sbNm.textContent=name;
+  var topNm=document.getElementById('topNm');if(topNm)topNm.textContent=first;
+  ['sbAva','topAva'].forEach(function(id){
+    var el=document.getElementById(id);if(!el)return;
+    if(img){el.innerHTML='<img src="'+img+'" alt="av">';el.style.background='transparent';}
+    else{el.innerHTML=ini;el.style.background=id==='sbAva'?'var(--gd)':'var(--g7)';}
+  });
+  var pa=document.getElementById('pAva');
+  if(pa){
+    if(img)pa.innerHTML='<img src="'+img+'" alt="av"><div class="pcam">&#128247;</div>';
+    else pa.innerHTML='<span>'+ini+'</span><div class="pcam">&#128247;</div>';
+  }
+  var pn=document.getElementById('pName');if(pn)pn.textContent=name;
+}
+function handleAv(input){
+  var f=input.files[0];if(!f)return;
+  if(f.size>2*1024*1024){showToast('Photo must be under 2MB.','e');return;}
+  var fr=new FileReader();
+  fr.onload=function(e){S.avatar=e.target.result;updateUser(S.name,S.avatar);showToast('Photo updated!');};
+  fr.readAsDataURL(f);
+}
+function saveProf(){
+  var n=document.getElementById('pfNm').value.trim();
+  if(n&&n.length>1)updateUser(n,S.avatar);
+  showToast('Profile saved!');renderProfile();
+}
+function renderProfile(){
+  var pf=document.getElementById('pfNm');if(pf)pf.value=S.name;
+  var pn=document.getElementById('pName');if(pn)pn.textContent=S.name;
+  var sc=document.getElementById('p-sc');if(sc)sc.textContent=S.saved.length;
+  var rc=document.getElementById('p-rc');if(rc)rc.textContent=S.recs.length;
+  var pa=document.getElementById('pAva');
+  if(pa){
+    if(S.avatar)pa.innerHTML='<img src="'+S.avatar+'" alt="av"><div class="pcam">&#128247;</div>';
+    else pa.innerHTML='<span>'+S.name.charAt(0).toUpperCase()+'</span><div class="pcam">&#128247;</div>';
+  }
+}
+
+// ── DASHBOARD ────────────────────────────────────────────────────
+function renderDash(){
+  var h2=(new Date()).getHours();
+  var gr=h2<12?'Good morning':h2<17?'Good afternoon':'Good evening';
+  var dw=document.getElementById('dWel');
+  if(dw)dw.innerHTML=gr+', <strong>'+H(S.name.split(' ')[0])+'</strong> &#128075;';
+  var q=rq();
+  var dq=document.getElementById('dqtx');if(dq)dq.textContent=q.t;
+  var da=document.getElementById('dqau');if(da)da.textContent='— '+q.a;
+  var dS=document.getElementById('dSaved');if(dS)dS.textContent=S.saved.length;
+  var dR=document.getElementById('dRecs');if(dR)dR.textContent=S.recs.length;
+  var sl=document.getElementById('dSavedList');
+  if(sl){
+    if(!S.saved.length){
+      sl.innerHTML='<div class="es" style="padding:28px"><div class="esic">&#9825;</div><p>No saved careers yet.</p></div>';
+    }else{
+      sl.innerHTML=S.saved.map(function(id){
+        var c=CAREERS.find(function(x){return x.id===id;});
+        if(!c)return'';
+        return'<div style="display:flex;align-items:center;gap:11px;padding:10px 18px;border-bottom:1px solid var(--bd)">'+
+          '<div style="flex:1"><div class="fw6" style="font-size:13px;color:var(--g8)">'+H(c.title)+'</div>'+
+          '<div style="font-size:11px;color:var(--tm)">'+H(c.cat)+' &bull; '+H(c.sal)+'</div></div>'+
+          '<button class="btn bsm bo" onclick="openCar('+c.id+')">View</button></div>';
+      }).join('');
+    }
+  }
+  var rl=document.getElementById('dRecList');
+  if(rl){
+    if(!S.recs.length){
+      rl.innerHTML='<div class="es" style="padding:24px 12px"><div class="esic">&#9733;</div><h3>No recommendations yet</h3>'+
+        '<button class="btn bp bsm mt12" onclick="go(\'recommend\')">Take Quiz</button></div>';
+    }else{
+      rl.innerHTML=S.recs.slice(0,4).map(function(r){
+        var c=CAREERS.find(function(x){return x.id===r.id;});
+        if(!c)return'';
+        return'<div class="rc"><div class="rrank"><div>'+r.score+'</div><div>pts</div></div>'+
+          '<div style="flex:1"><div class="fw6" style="font-size:13.5px;color:var(--g8)">'+H(c.title)+'</div>'+
+          '<div style="font-size:11.5px;color:var(--t2)">'+H(c.cat)+'</div></div>'+
+          '<button class="btn bsm bo" onclick="openCar('+r.id+')">View</button></div>';
+      }).join('');
+    }
+  }
+}
+
+// ── CAREERS ──────────────────────────────────────────────────────
+function renderCars(){
+  var g=document.getElementById('carGrid');if(!g)return;
+  var q=(document.getElementById('carSrch')||{value:''}).value.toLowerCase();
+  var cat=(document.getElementById('carCat')||{value:''}).value;
+  var str=(document.getElementById('carStr')||{value:''}).value;
+  var list=CAREERS.filter(function(c){
+    return(!q||c.title.toLowerCase().includes(q)||c.desc.toLowerCase().includes(q)||c.cat.toLowerCase().includes(q))
+      &&(!cat||c.cat===cat)&&(!str||c.str===str);
+  });
+  if(!list.length){g.innerHTML='<div class="es" style="background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:60px;grid-column:1/-1"><div class="esic">&#128269;</div><h3>No careers found</h3></div>';return;}
+  g.innerHTML=list.map(function(c){
+    var sv=S.saved.indexOf(c.id)>-1;
+    return'<div class="ccard" onclick="openCar('+c.id+')">'+
+      '<span class="cbadge">'+H(c.cat)+'</span>'+
+      '<div class="ctitle">'+H(c.title)+'</div>'+
+      (c.sal?'<div class="csal">&#128176; '+H(c.sal)+'</div>':'')+
+      '<div class="cdesc">'+H(c.desc)+'</div>'+
+      '<div style="margin-top:8px"><span class="tag tgr" style="font-size:10px">'+H(c.str||'general')+'</span></div>'+
+      '<div class="cacts"><span class="btn bp bsm">View Details</span>'+
+      '<span class="btn '+(sv?'bsuc':'bo')+' bsm" onclick="event.stopPropagation();saveCar('+c.id+',this)">'+(sv?'&#10003; Saved':'&#9825; Save')+'</span></div></div>';
+  }).join('');
+}
+
+function saveCar(id,btn){
+  if(S.saved.indexOf(id)>-1){showToast('Already saved!','e');return;}
+  S.saved.push(id);
+  if(btn){btn.innerHTML='&#10003; Saved';btn.className='btn bsuc bsm';}
+  showToast('Career saved! &#10003;');
+  var dS=document.getElementById('dSaved');if(dS)dS.textContent=S.saved.length;
+  var psc=document.getElementById('p-sc');if(psc)psc.textContent=S.saved.length;
+}
+
+function openCar(id){
+  var c=CAREERS.find(function(x){return x.id===id;});if(!c)return;
+  var bc=document.getElementById('cdbc');if(bc)bc.textContent=c.title;
+  var sv=S.saved.indexOf(id)>-1;
+  var m=document.getElementById('cdMain');
+  if(m)m.innerHTML='<div class="cbd">'+
+    '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap">'+
+    '<div><span class="cbadge">'+H(c.cat)+'</span>'+
+    '<h1 style="font-family:DM Serif Display,serif;font-size:24px;color:var(--g9);margin-bottom:5px">'+H(c.title)+'</h1>'+
+    (c.sal?'<div style="font-size:13px;color:var(--g6);font-weight:600">&#128176; '+H(c.sal)+'</div>':'')+
+    '<div style="margin-top:6px"><span class="tag tgr" style="font-size:10px">'+H(c.str||'general')+' Stream</span></div></div>'+
+    '<button class="btn '+(sv?'bsuc':'bo')+' bsm" onclick="saveCar('+id+',this)">'+(sv?'&#10003; Saved':'&#9825; Save Career')+'</button></div>'+
+    '<div class="dset"><div class="dstit">About This Career</div><p class="dstx">'+H(c.desc)+'</p></div>'+
+    '<div class="dset"><div class="dstit">Career Opportunities in Nigeria</div><p class="dstx">'+H(c.opp)+'</p></div></div>';
+  var sj=document.getElementById('cdSubj');
+  if(sj&&c.subj&&c.subj.length){
+    sj.style.display='';
+    sj.innerHTML='<div class="chd"><span class="ctit">JAMB requirements for this career</span><span class="tag tg">'+c.subj.length+'</span></div>'+
+      '<div class="cbd"><div class="tl">'+c.subj.map(function(s){
+        var sub=SUBJECTS.find(function(x){return x.name===s;});
+        return'<span class="tag treq" style="cursor:pointer" onclick="openSub('+(sub?sub.id:0)+')">'+H(s)+'</span>';
+      }).join('')+'</div></div>';
+  }
+  var co=document.getElementById('cdCourses');
+  if(co)co.innerHTML='<div class="chd"><span class="ctit">Courses That Lead Here</span><span class="tag tg">'+c.courses.length+'</span></div>'+
+    '<div class="cbd" style="padding:14px">'+c.courses.map(function(cn){
+      var course=COURSES.find(function(x){return x.name===cn;});
+      return'<div style="display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--bd)">'+
+        '<a style="font-weight:600;font-size:13px;color:var(--g6);cursor:pointer;flex:1" onclick="openCo('+(course?course.id:0)+')">'+H(cn)+'</a></div>';
+    }).join('')+'</div>';
+  var sk=document.getElementById('cdSkills');
+  if(sk)sk.innerHTML='<div class="chd"><span class="ctit">Skills Required</span></div><div class="cbd">'+
+    '<div class="two" style="gap:20px"><div><div class="dstit">&#128295; Technical</div>'+
+    c.st.map(function(sn){
+      var skill=ST.find(function(x){return x.name===sn;});
+      return'<div style="padding:8px 0;border-bottom:1px solid var(--bd);cursor:pointer" onclick="openSk('+(skill?skill.id:0)+')">'+
+        '<span class="tag tb" style="font-size:10px;margin:0">Tech</span> '+
+        '<span style="font-size:12.5px;font-weight:600;color:var(--g8)">'+H(sn)+'</span></div>';
+    }).join('')+'</div><div><div class="dstit">&#128172; Soft</div>'+
+    c.ss.map(function(sn){
+      var skill=SS.find(function(x){return x.name===sn;});
+      return'<div style="padding:8px 0;border-bottom:1px solid var(--bd);cursor:pointer" onclick="openSk('+(skill?skill.id:0)+')">'+
+        '<span class="tag tp" style="font-size:10px;margin:0">Soft</span> '+
+        '<span style="font-size:12.5px;font-weight:600;color:var(--g8)">'+H(sn)+'</span></div>';
+    }).join('')+'</div></div></div>';
+  var rel=document.getElementById('cdRelated');
+  if(rel){
+    var same=CAREERS.filter(function(x){return x.cat===c.cat&&x.id!==id;}).slice(0,6);
+    rel.innerHTML='<div class="chd"><span class="ctit" style="font-size:14px">Related Careers</span></div><div style="padding:9px">'+
+      same.map(function(r){
+        return'<div onclick="openCar('+r.id+')" style="padding:8px 10px;border-radius:7px;font-weight:600;font-size:12.5px;color:var(--g8);cursor:pointer" '+
+          'onmouseover="this.style.background=\'var(--s3)\'" onmouseout="this.style.background=\'\'">&#9670; '+H(r.title)+'</div>';
+      }).join('')+'</div>';
+  }
+  go('cardet');
+}
+
+// ── COURSES ──────────────────────────────────────────────────────
+function renderCos(){
+  var g=document.getElementById('coGrid');if(!g)return;
+  var q=(document.getElementById('coSrch')||{value:''}).value.toLowerCase();
+  var str=(document.getElementById('coStr')||{value:''}).value;
+  var list=COURSES.filter(function(c){return(!q||c.name.toLowerCase().includes(q)||c.fac.toLowerCase().includes(q))&&(!str||c.str===str);});
+  if(!list.length){g.innerHTML='<div class="es" style="background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:60px;grid-column:1/-1"><div class="esic">&#128269;</div><h3>No courses found</h3></div>';return;}
+  g.innerHTML=list.map(function(c){
+    return'<div class="cocard" onclick="openCo('+c.id+')">'+
+      '<div class="cofac">'+H(c.fac)+'</div>'+
+      '<div class="conm">'+H(c.name)+'</div>'+
+      '<div class="codur">'+H(c.dur)+' &bull; '+H(c.lvl)+' &bull; <span class="tag tgr" style="font-size:10px;padding:2px 8px;margin:0">'+H(c.str||'General')+'</span></div>'+
+      '<div class="codsc">'+H(c.desc)+'</div>'+
+      '<div style="font-size:11px;color:var(--g6);font-weight:600;margin-top:9px">View careers &amp; subjects &#8594;</div></div>';
+  }).join('');
+}
+
+function openCo(id){
+  var c=COURSES.find(function(x){return x.id===id;});if(!c)return;
+  var bc=document.getElementById('codbc');if(bc)bc.textContent=c.name;
+  var m=document.getElementById('codMain');
+  if(m)m.innerHTML='<div class="cbd">'+
+    '<span class="tag tgr" style="font-size:10px;margin-bottom:8px;display:inline-block">'+H(c.str||'General')+' Stream</span>'+
+    '<h1 style="font-family:DM Serif Display,serif;font-size:22px;color:var(--g9);margin-bottom:5px">'+H(c.name)+'</h1>'+
+    '<div style="font-size:13px;color:var(--tm)">'+H(c.fac)+' &bull; '+H(c.dur)+' &bull; '+H(c.lvl)+'</div>'+
+    '<div class="dset" style="margin-top:14px"><div class="dstit">About This Course</div><p class="dstx">'+H(c.desc)+'</p></div></div>';
+  var sj=document.getElementById('codSubj');
+  if(sj)sj.innerHTML='<div class="chd"><span class="ctit" style="font-size:14px">JAMB requirements to achieve this course</span></div><div class="cbd">'+
+    '<div class="tl">'+c.subj.map(function(s){
+      var sub=SUBJECTS.find(function(x){return x.name===s;});
+      return'<span class="tag treq" style="cursor:pointer" onclick="openSub('+(sub?sub.id:0)+')">'+H(s)+'</span>';
+    }).join('')+'</div><p style="font-size:12px;color:var(--tm);margin-top:12px">Click any subject to see all courses and careers that require it.</p></div>';
+  var ca=document.getElementById('codCareers');
+  if(ca)ca.innerHTML='<div class="chd"><span class="ctit">This course leads to</span><span class="tag tg">'+c.careers.length+'</span></div>'+
+    '<div class="cbd" style="padding:14px">'+c.careers.map(function(cn){
+      var career=CAREERS.find(function(x){return x.title===cn;});
+      return'<div style="display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--bd)">'+
+        '<a style="font-weight:600;font-size:13px;color:var(--g6);cursor:pointer;flex:1" onclick="openCar('+(career?career.id:0)+')">'+H(cn)+'</a></div>';
+    }).join('')+'</div>';
+  go('codet');
+}
+
+// ── SUBJECTS ─────────────────────────────────────────────────────
+function renderSubs(){
+  var g=document.getElementById('subGrid');if(!g)return;
+  g.innerHTML=SUBJECTS.map(function(s){
+    return'<div class="subcard" onclick="openSub('+s.id+')">'+
+      '<div class="subnm">'+H(s.name)+'</div>'+
+      '<div class="subcat">'+H(s.cat)+' subject</div>'+
+      (s.comp?'<span style="display:inline-block;font-size:9.5px;font-weight:700;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:#dcfce7;color:#166534;margin-top:5px">&#10003; Compulsory</span>':'')+
+      '<div style="font-size:11.5px;color:var(--t2);margin-top:7px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+H(s.desc)+'</div>'+
+      '<div style="font-size:11px;color:var(--g6);font-weight:600;margin-top:8px">View courses &amp; careers &#8594;</div></div>';
+  }).join('');
+}
+function filterSubs(q){document.querySelectorAll('.subcard').forEach(function(el){el.style.display=(!q||el.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});}
+function filterSubCat(cat,btn){
+  document.querySelectorAll('#subGrid .subcard').forEach(function(el){el.style.display=(!cat||el.textContent.toLowerCase().includes(cat))?'':'none';});
+  document.querySelectorAll('#pg-subjects .fchip').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+}
+function openSub(id){
+  var s=SUBJECTS.find(function(x){return x.id===id;});if(!s)return;
+  var bc=document.getElementById('sdbc');if(bc)bc.textContent=s.name;
+  var m=document.getElementById('sdMain');
+  if(m)m.innerHTML='<div class="cbd"><div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:16px">'+
+    '<div style="width:46px;height:46px;background:var(--gd1);border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">&#128218;</div>'+
+    '<div><h1 style="font-family:DM Serif Display,serif;font-size:22px;color:var(--g9)">'+H(s.name)+'</h1>'+
+    '<div style="margin-top:5px"><span class="tag tb">'+H(s.cat)+'</span>'+(s.comp?'<span class="tag tg">&#10003; Compulsory (JAMB)</span>':'')+'</div></div></div>'+
+    '<div class="dset"><div class="dstit">About This Subject</div><p class="dstx">'+H(s.desc)+'</p></div></div>';
+  var co=document.getElementById('sdCourses');
+  if(co)co.innerHTML='<div class="chd"><span class="ctit">Courses Requiring This Subject</span><span class="tag tg">'+s.courses.length+'</span></div>'+
+    '<div class="cbd" style="padding:14px">'+s.courses.map(function(cn){
+      var course=COURSES.find(function(x){return x.name===cn;});
+      return'<div style="padding:9px 0;border-bottom:1px solid var(--bd)">'+
+        '<a style="font-weight:600;font-size:13px;color:var(--g6);cursor:pointer" onclick="openCo('+(course?course.id:0)+')">'+H(cn)+'</a></div>';
+    }).join('')+'</div>';
+  var ca=document.getElementById('sdCareers');
+  if(ca)ca.innerHTML='<div class="chd"><span class="ctit" style="font-size:14px">Related Careers</span></div><div style="padding:10px">'+
+    s.careers.map(function(cn){
+      var career=CAREERS.find(function(x){return x.title===cn;});
+      return'<div onclick="openCar('+(career?career.id:0)+')" style="padding:8px 10px;border-radius:7px;font-size:12.5px;font-weight:600;color:var(--g8);cursor:pointer" '+
+        'onmouseover="this.style.background=\'var(--s3)\'" onmouseout="this.style.background=\'\'">&#9670; '+H(cn)+'</div>';
+    }).join('')+'</div>';
+  go('subdet');
+}
+
+// ── SKILLS ───────────────────────────────────────────────────────
+function renderSks(){
+  var tg=document.getElementById('sk-tech'),sg=document.getElementById('sk-soft');
+  if(tg)tg.innerHTML=ST.map(function(sk){
+    return'<div class="skcard" onclick="openSk('+sk.id+')"><div class="skico it">&#128187;</div>'+
+      '<div style="flex:1;min-width:0"><div class="sknm">'+H(sk.name)+'</div>'+
+      '<span class="tag tb" style="font-size:10px;padding:2px 8px;margin:3px 0 5px">Technical</span>'+
+      '<div class="skdsc">'+H(sk.desc)+'</div>'+
+      '<div style="font-size:11px;color:var(--g6);font-weight:600;margin-top:6px">Click for details &#8594;</div></div></div>';
+  }).join('');
+  if(sg)sg.innerHTML=SS.map(function(sk){
+    return'<div class="skcard" onclick="openSk('+sk.id+')"><div class="skico is">&#128170;</div>'+
+      '<div style="flex:1;min-width:0"><div class="sknm">'+H(sk.name)+'</div>'+
+      '<span class="tag tp" style="font-size:10px;padding:2px 8px;margin:3px 0 5px">Soft Skill</span>'+
+      '<div class="skdsc">'+H(sk.desc)+'</div>'+
+      '<div style="font-size:11px;color:var(--g6);font-weight:600;margin-top:6px">Click for details &#8594;</div></div></div>';
+  }).join('');
+}
+function filterSk(type,q){
+  var g=document.getElementById('sk-'+type);if(!g)return;
+  g.querySelectorAll('.skcard').forEach(function(el){el.style.display=(!q||el.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});
+}
+function swTab(type){
+  ['tech','soft'].forEach(function(t){
+    var tp=document.getElementById('tp-'+t),tb=document.getElementById('tb-'+t);
+    if(tp)tp.classList.toggle('on',t===type);
+    if(tb)tb.classList.toggle('on',t===type);
+  });
+}
+function openSk(id){
+  var sk=ST.concat(SS).find(function(x){return x.id===id;});if(!sk)return;
+  var bc=document.getElementById('skdbc');if(bc)bc.textContent=sk.name;
+  var isTech=sk.type==='technical';
+  var m=document.getElementById('skdMain');
+  if(m)m.innerHTML='<div class="cbd"><div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:16px">'+
+    '<div class="skico '+(isTech?'it':'is')+'" style="width:52px;height:52px;font-size:22px">'+(isTech?'&#128187;':'&#128170;')+'</div>'+
+    '<div><h1 style="font-family:DM Serif Display,serif;font-size:22px;color:var(--g9);margin-bottom:5px">'+H(sk.name)+'</h1>'+
+    '<span class="tag '+(isTech?'tb':'tp')+'">'+H(sk.type)+' Skill</span></div></div>'+
+    '<div class="dset"><div class="dstit">What This Skill Is</div><p class="dstx">'+H(sk.desc)+'</p></div>'+
+    '<div class="dset"><div class="dstit">How to Learn &amp; Develop It</div><p class="dstx">'+H(sk.how)+'</p></div>'+
+    '<div style="margin-top:18px;padding:14px;background:var(--g0);border-radius:var(--rs);border-left:3px solid var(--gd)">'+
+    '<div style="font-size:12px;font-weight:700;color:var(--g7);margin-bottom:4px">Emmyxoxo says:</div>'+
+    '<div style="font-size:12.5px;color:var(--t2);font-style:italic">Skills open doors - but only when you can prove you have them. Build a portfolio project and share it publicly from day one.</div></div></div>';
+  var ca=document.getElementById('skdCareers');
+  if(ca)ca.innerHTML='<div class="chd"><span class="ctit" style="font-size:14px">Careers That Need This</span><span class="tag tg">'+sk.careers.length+'</span></div>'+
+    '<div style="padding:10px">'+sk.careers.map(function(cn){
+      var career=CAREERS.find(function(x){return x.title===cn;});
+      return'<div onclick="openCar('+(career?career.id:0)+')" style="padding:8px 10px;border-radius:7px;font-size:12.5px;font-weight:600;color:var(--g8);cursor:pointer" '+
+        'onmouseover="this.style.background=\'var(--s3)\'" onmouseout="this.style.background=\'\'">&#9670; '+H(cn)+'</div>';
+    }).join('')+'</div>';
+  go('skdet');
+}
+
+// ── RECOMMENDATIONS ───────────────────────────────────────────────
+document.querySelectorAll('.cpill').forEach(function(pill){
+  var inp=pill.querySelector('input');if(!inp)return;
+  pill.addEventListener('click',function(){
+    if(inp.type==='radio'){
+      document.querySelectorAll('.cpill input[name="stream"]').forEach(function(i){i.closest('.cpill').classList.remove('on');});
+      inp.checked=true;pill.classList.add('on');
+    }else{inp.checked=!inp.checked;pill.classList.toggle('on',inp.checked);}
+  });
+});
+
+function genRecs(){
+  var si=document.querySelector('input[name="stream"]:checked');
+  var stream=si?si.value:'';
+  var all=Array.from(document.querySelectorAll('#pg-recommend input[type=checkbox]:checked')).map(function(i){return i.value;});
+  var ints=all.filter(function(v){return['technology','healthcare','engineering','business','law','media','education','science','agriculture'].indexOf(v)>-1;});
+  var subVals=all.filter(function(v){return SUBJECTS.some(function(s){return s.name===v;});});
+  var intMap={technology:['Technology'],healthcare:['Healthcare'],engineering:['Engineering'],business:['Finance'],law:['Law'],media:['Media'],education:['Education'],science:['Science'],agriculture:['Science','Engineering']};
+  var scores={};
+  CAREERS.forEach(function(c){
+    var sc=0;
+    if(stream&&c.str===stream)sc+=30;
+    ints.forEach(function(i){var cats=intMap[i]||[];if(cats.indexOf(c.cat)>-1)sc+=20;});
+    subVals.forEach(function(s){if(c.subj&&c.subj.indexOf(s)>-1)sc+=15;});
+    if(sc>0)scores[c.id]=sc;
+  });
+  var sorted=Object.keys(scores).sort(function(a,b){return scores[b]-scores[a];}).slice(0,12);
+  S.recs=sorted.map(function(id){return{id:parseInt(id),score:scores[id]};});
+  var dR=document.getElementById('dRecs');if(dR)dR.textContent=S.recs.length;
+  var prc=document.getElementById('p-rc');if(prc)prc.textContent=S.recs.length;
+  var res=document.getElementById('recResults');if(!res)return;
+  if(!S.recs.length){res.style.display='';res.innerHTML='<div class="alert ae"><span>&#10005;</span>Please select at least one interest or subject.</div>';return;}
+  var cards=S.recs.map(function(r,i){
+    var c=CAREERS.find(function(x){return x.id===r.id;});if(!c)return'';
+    var pct=Math.min(100,Math.round(r.score/90*100));
+    return'<div class="card" style="position:relative;overflow:hidden">'+
+      '<div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--g6) '+pct+'%,var(--bd) '+pct+'%)"></div>'+
+      '<div class="cbd" style="padding:16px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
+      '<span style="width:32px;height:32px;background:var(--g7);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">'+(i+1)+'</span>'+
+      '<span style="font-size:11px;font-weight:600;color:var(--g6)">'+pct+'% match</span></div>'+
+      '<div style="font-family:DM Serif Display,serif;font-size:16px;color:var(--g9);margin-bottom:3px">'+H(c.title)+'</div>'+
+      '<div style="font-size:11.5px;color:var(--tm);margin-bottom:8px">'+H(c.cat)+' &bull; '+H(c.sal)+'</div>'+
+      '<div style="font-size:12px;color:var(--t2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+H(c.desc)+'</div>'+
+      '<div style="margin-top:11px;display:flex;gap:7px">'+
+      '<button class="btn bsm bp" style="flex:1;justify-content:center" onclick="openCar('+r.id+')">View Details</button>'+
+      '<button class="btn bsm bo" onclick="saveCar('+r.id+',this)">&#9825;</button></div></div></div>';
+  }).join('');
+  res.style.display='';
+  res.innerHTML='<div class="ph"><h1>Your Career Matches</h1><p>Based on your stream, interests and subjects - by Emmyxoxo.</p></div>'+
+    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:22px">'+cards+'</div>'+
+    '<div style="padding:18px;background:var(--g0);border:1px solid var(--g1);border-radius:var(--r);text-align:center">'+
+    '<p style="font-size:13px;color:var(--t2);margin-bottom:13px">Want different results? Update your selections above.</p>'+
+    '<button class="btn bo" onclick="window.scrollTo({top:0,behavior:\'smooth\'})">Redo the Quiz</button></div>';
+}
+
+// ── COMPARE ──────────────────────────────────────────────────────
+function initCmp(){
+  ['cmp1','cmp2','cmp3'].forEach(function(id){
+    var sel=document.getElementById(id);if(!sel)return;
+    var cur=sel.value;
+    sel.innerHTML='<option value="">&#8212; Select &#8212;</option>'+
+      CAREERS.map(function(c){return'<option value="'+c.id+'"'+(cur==c.id?' selected':'')+'>'+H(c.title)+' ('+H(c.cat)+')</option>';}).join('');
+  });
+  renderCmp();
+}
+function renderCmp(){
+  var ids=['cmp1','cmp2','cmp3'].map(function(id){var s=document.getElementById(id);return s?parseInt(s.value)||0:0;}).filter(Boolean);
+  var res=document.getElementById('cmpRes');if(!res)return;
+  if(!ids.length){res.innerHTML='<p style="color:var(--tm);font-size:13px">Select at least one career to compare.</p>';return;}
+  var cs=ids.map(function(id){return CAREERS.find(function(x){return x.id===id;});}).filter(Boolean);
+  var rows=[
+    ['Category',function(c){return H(c.cat);}],
+    ['Stream',function(c){return'<span class="tag tgr" style="font-size:10px">'+H(c.str||'—')+'</span>';}],
+    ['Salary',function(c){return'<span style="color:var(--g6);font-weight:600">'+H(c.sal||'—')+'</span>';}],
+    ['Top Courses',function(c){return c.courses.slice(0,3).map(function(n){return'<div style="font-size:12px">&#8594; '+H(n)+'</div>';}).join('');}],
+    ['Subjects',function(c){return c.subj.map(function(s){return'<span class="tag treq" style="font-size:10px">'+H(s)+'</span>';}).join('');}],
+    ['Tech Skills',function(c){return c.st.map(function(s){return'<div style="font-size:12px">&bull; '+H(s)+'</div>';}).join('');}],
+    ['Soft Skills',function(c){return c.ss.map(function(s){return'<div style="font-size:12px">&bull; '+H(s)+'</div>';}).join('');}],
+    ['View',function(c){return'<button class="btn bp bsm bbl" onclick="openCar('+c.id+')">Full Details</button>';}]
+  ];
+  res.innerHTML='<div style="overflow-x:auto"><table class="dt" style="min-width:500px"><thead><tr><th style="width:140px">Attribute</th>'+
+    cs.map(function(c){return'<th><a onclick="openCar('+c.id+')" style="color:var(--g6);cursor:pointer">'+H(c.title)+'</a></th>';}).join('')+
+    '</tr></thead><tbody>'+
+    rows.map(function(r){return'<tr><td class="fw6">'+r[0]+'</td>'+cs.map(function(c){return'<td>'+r[1](c)+'</td>';}).join('')+'</tr>';}).join('')+
+    '</tbody></table></div>';
+}
+
+// ── QUIZ ─────────────────────────────────────────────────────────
+var QZ={idx:0,score:0,done:false};
+function startQuiz(){
+  var b=document.getElementById('quizBody');if(!b)return;
+  QZ={idx:0,score:0,done:false};
+  b.innerHTML='<div class="ph"><h1>Career Knowledge Quiz</h1><p>10 questions - test your Nigerian career knowledge.</p></div>'+
+    '<div class="card"><div class="cbd" id="qzContent"></div></div>';
+  renderQQ();
+}
+function renderQQ(){
+  var c=document.getElementById('qzContent');if(!c)return;
+  if(QZ.done){
+    var pct=Math.round(QZ.score/QQS.length*100);
+    c.innerHTML='<div style="text-align:center;padding:22px">'+
+      '<div style="font-size:48px;margin-bottom:12px">'+(pct>=80?'&#127942;':pct>=60?'&#128218;':'&#128170;')+'</div>'+
+      '<div style="font-family:DM Serif Display,serif;font-size:24px;color:var(--g9);margin-bottom:6px">'+QZ.score+'/'+QQS.length+'</div>'+
+      '<div style="font-size:14px;color:var(--t2);margin-bottom:20px">'+(pct>=80?'Excellent! You know your careers well.':pct>=60?'Good job! Keep learning.':'Keep studying - you will get there!')+'</div>'+
+      '<button class="btn bg" onclick="startQuiz()">Retake Quiz</button></div>';
+    return;
+  }
+  var q=QQS[QZ.idx];
+  c.innerHTML='<div style="display:flex;justify-content:space-between;margin-bottom:12px">'+
+    '<span style="font-size:12px;color:var(--tm)">Question '+(QZ.idx+1)+' of '+QQS.length+'</span>'+
+    '<span style="font-size:12px;color:var(--g6);font-weight:600">Score: '+QZ.score+'</span></div>'+
+    '<div style="height:4px;background:var(--bd);border-radius:2px;margin-bottom:16px">'+
+    '<div style="height:100%;background:var(--g6);border-radius:2px;width:'+Math.round(QZ.idx/QQS.length*100)+'%;transition:width .3s"></div></div>'+
+    '<div class="fw6" style="font-size:14px;color:var(--g9);margin-bottom:14px">'+(QZ.idx+1)+'. '+H(q.q)+'</div>'+
+    q.opts.map(function(opt,oi){
+      return'<div class="card mb16" style="padding:0;overflow:hidden" id="qopt'+oi+'">'+
+        '<button onclick="ansQ('+QZ.idx+','+oi+')" style="width:100%;text-align:left;padding:12px 16px;background:none;border:none;cursor:pointer;font-family:Sora,sans-serif;font-size:13px;display:flex;align-items:center;gap:10px">'+
+        '<span style="width:24px;height:24px;border-radius:50%;border:2px solid var(--bd);display:inline-flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700">'+'ABCD'[oi]+'</span>'+
+        H(opt)+'</button></div>';
+    }).join('');
+}
+function ansQ(qi,oi){
+  var q=QQS[qi];if(oi===q.a)QZ.score++;
+  q.opts.forEach(function(_,i){
+    var card=document.getElementById('qopt'+i);if(!card)return;
+    var btn=card.querySelector('button');
+    if(i===q.a){card.style.background='#dcfce7';card.style.borderColor='var(--g4)';if(btn)btn.disabled=true;}
+    else if(i===oi){card.style.background='#fee2e2';card.style.borderColor='var(--red)';if(btn)btn.disabled=true;}
+    else if(btn)btn.disabled=true;
+  });
+  setTimeout(function(){
+    if(QZ.idx<QQS.length-1){QZ.idx++;renderQQ();}
+    else{QZ.done=true;renderQQ();}
+  },900);
+}
+
+// ── MARKET ───────────────────────────────────────────────────────
+function renderMarket(){
+  var ms=document.getElementById('mktSec');
+  if(ms)ms.innerHTML=SECTORS.map(function(s){
+    return'<div style="padding:13px 18px;border-bottom:1px solid var(--bd)">'+
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">'+
+      '<div class="fw6" style="font-size:13px;color:var(--g8)">'+H(s.n)+'</div>'+
+      '<div style="display:flex;gap:6px;flex-shrink:0">'+
+      '<span class="tag tg" style="font-size:10px;padding:2px 8px;margin:0">'+H(s.g)+'</span>'+
+      '<span class="tag tb" style="font-size:10px;padding:2px 8px;margin:0">'+H(s.j)+'</span></div></div>'+
+      '<div style="font-size:11.5px;color:var(--t2)">'+H(s.w)+'</div></div>';
+  }).join('');
+  var msal=document.getElementById('mktSal');
+  if(msal)msal.innerHTML=SALARIES.map(function(r){
+    return'<tr><td class="fw6">'+H(r[0])+'</td><td>'+H(r[1])+'</td><td style="color:var(--g6);font-weight:600">'+H(r[2])+'</td></tr>';
+  }).join('');
+}
+
+// ── SAVED ────────────────────────────────────────────────────────
+function renderSaved(){
+  var g=document.getElementById('savedGrid');if(!g)return;
+  if(!S.saved.length){
+    g.innerHTML='<div class="es" style="background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:70px">'+
+      '<div class="esic">&#9825;</div><h3>No saved careers yet</h3>'+
+      '<button class="btn bp mt12" onclick="go(\'careers\')">Explore Careers</button></div>';
+    return;
+  }
+  g.innerHTML='<div class="cgrid">'+S.saved.map(function(id){
+    var c=CAREERS.find(function(x){return x.id===id;});if(!c)return'';
+    return'<div class="ccard" style="cursor:default"><span class="cbadge">'+H(c.cat)+'</span>'+
+      '<div class="ctitle">'+H(c.title)+'</div>'+(c.sal?'<div class="csal">&#128176; '+H(c.sal)+'</div>':'')+
+      '<div class="cdesc">'+H(c.desc)+'</div>'+
+      '<div class="cacts">'+
+      '<button class="btn bp bsm" onclick="openCar('+c.id+')">View Details</button>'+
+      '<button class="btn bo bsm" onclick="unsaveCar('+c.id+')">Remove</button></div></div>';
+  }).join('')+'</div>';
+}
+function unsaveCar(id){
+  S.saved=S.saved.filter(function(x){return x!==id;});
+  showToast('Removed from saved.');renderSaved();
+  var dS=document.getElementById('dSaved');if(dS)dS.textContent=S.saved.length;
+  var psc=document.getElementById('p-sc');if(psc)psc.textContent=S.saved.length;
+}
+
+// ── WISDOM ───────────────────────────────────────────────────────
+function renderWis(filter){
+  var g=document.getElementById('wisGrid');if(!g)return;
+  var list=filter==='emmy'?QUOTES.filter(function(q){return q.a==='Emmy xoxo';}):QUOTES;
+  g.innerHTML=list.map(function(q){
+    var ie=q.a==='Emmy xoxo';
+    return'<div class="wcard'+(ie?' emmy':'')+'">'+
+      '<div style="font-size:28px;color:var(--gd2);font-family:Georgia,serif">&#8220;</div>'+
+      '<p class="wtx">'+H(q.t)+'</p>'+
+      '<div style="display:flex;align-items:center;gap:8px">'+
+      '<div style="flex:1;height:1px;background:var(--bd)"></div>'+
+      '<span class="wau'+(ie?' emmy':'')+'">&#8212; '+H(q.a)+'</span>'+
+      (ie?'<span class="tag tgd" style="font-size:9.5px;padding:2px 7px;margin:0">Emmyxoxo</span>':'')+
+      '</div></div>';
+  }).join('');
+}
+function filterWis(f,btn){
+  renderWis(f);
+  document.querySelectorAll('#pg-wisdom .fchip').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+}
+
+// ── FAQ ──────────────────────────────────────────────────────────
+function renderFaq(){
+  var b=document.getElementById('faqBody');if(!b)return;
+  b.innerHTML=FAQS.map(function(cat){
+    return'<div class="card mb16"><div class="chd"><span class="ctit">'+cat.icon+' '+H(cat.cat)+'</span></div>'+
+      cat.qs.map(function(item){
+        return'<details><summary>'+H(item.q)+' <span style="font-size:18px;color:var(--g4)">&#43;</span></summary>'+
+          '<div class="ans">'+H(item.a)+'</div></details>';
+      }).join('')+'</div>';
+  }).join('');
+}
+
+// ── INIT ─────────────────────────────────────────────────────────
+(function(){
+  setQ();
+  updateUser(S.name,null);
+  go('dashboard');
+}());
+
+// ── MARKET TAB SWITCHER ───────────────────────────────────────────
+function mktTab(tab) {
+  ['sectors','salaries','charts','demand','global'].forEach(function(t) {
+    var tp = document.getElementById('mkt-' + t);
+    var tb = document.getElementById('mkt-tb-' + t);
+    if (tp) tp.classList.toggle('on', t === tab);
+    if (tb) tb.classList.toggle('on', t === tab);
+  });
+  if (tab === 'charts') drawCharts();
+}
+
+// ── MARKET DATA ───────────────────────────────────────────────────
+var SECTORS_FULL = [
+  {n:"Financial Technology (FinTech)",g:28,j:"82,000+",w:"CBN digital finance push, mobile money boom, crypto regulation",sk:"Blockchain, Data Science, Cybersecurity"},
+  {n:"Healthcare and Pharma",g:22,j:"61,000+",w:"Population growth, NHIS expansion, telemedicine surge",sk:"Clinical Skills, Lab Science, Public Health"},
+  {n:"Technology and Software",g:25,j:"94,000+",w:"Andela, Flutterwave, remote hiring, tech hub growth in Lagos",sk:"Programming, Cloud Computing, DevOps, AI/ML"},
+  {n:"Agriculture Technology",g:35,j:"210,000+",w:"Food security crisis, IITA investment, government agri-programme",sk:"Agri-Science, Engineering, Data Analytics"},
+  {n:"Education Technology",g:18,j:"28,000+",w:"Post-ASUU digital shift, EdTech startups, online learning boom",sk:"E-Learning Design, Content Creation, UI/UX"},
+  {n:"Energy and Oil and Gas",g:12,j:"45,000+",w:"Dangote Refinery, LNG expansion, solar energy adoption",sk:"Petroleum Engineering, HSE, Project Management"},
+  {n:"Real Estate and Construction",g:15,j:"38,000+",w:"Lagos housing deficit of 3M units, infrastructure spending",sk:"Architecture, Civil Engineering, Quantity Surveying"},
+  {n:"Creative Economy",g:20,j:"35,000+",w:"Nollywood global reach, music exports, fashion week growth",sk:"Film Production, Music Technology, Fashion Design"},
+  {n:"Logistics and Supply Chain",g:17,j:"52,000+",w:"E-commerce explosion, last-mile delivery gap, Jumia growth",sk:"Supply Chain Management, Data Analytics"},
+  {n:"Government and Public Sector",g:8,j:"120,000+",w:"Civil service reform, digital government services initiative",sk:"Public Administration, Policy Analysis, Law"}
+];
+
+var SALARIES_FULL = [
+  ["Software Developer","Technology","N100K-N200K","N300K-N500K","N600K-N1.2M","N1.5M+"],
+  ["Data Scientist","Technology","N150K-N200K","N350K-N600K","N700K-N1.2M","N1.8M+"],
+  ["Cybersecurity Analyst","Technology","N150K-N250K","N300K-N600K","N700K-N1M","N1.5M+"],
+  ["UI/UX Designer","Technology","N80K-N150K","N200K-N400K","N500K-N800K","N1M+"],
+  ["Medical Doctor","Healthcare","N200K-N300K","N400K-N700K","N800K-N1.5M","N2M+"],
+  ["Pharmacist","Healthcare","N100K-N150K","N200K-N400K","N500K-N800K","N1M+"],
+  ["Nurse","Healthcare","N50K-N80K","N100K-N200K","N250K-N400K","N600K+"],
+  ["Civil Engineer","Engineering","N80K-N130K","N200K-N400K","N500K-N900K","N1.2M+"],
+  ["Petroleum Engineer","Engineering","N250K-N400K","N600K-N1M","N1.2M-N2M","N3M+"],
+  ["Electrical Engineer","Engineering","N80K-N130K","N200K-N400K","N500K-N800K","N1M+"],
+  ["Architect","Engineering","N80K-N120K","N200K-N400K","N500K-N900K","N1.5M+"],
+  ["Accountant","Finance","N70K-N120K","N200K-N400K","N500K-N900K","N1.5M+"],
+  ["Investment Analyst","Finance","N120K-N200K","N300K-N600K","N700K-N1.2M","N2M+"],
+  ["Actuary","Finance","N200K-N350K","N500K-N900K","N1M-N1.8M","N2.5M+"],
+  ["Economist","Finance","N100K-N200K","N300K-N600K","N700K-N1.2M","N2M+"],
+  ["Lawyer","Law","N80K-N150K","N200K-N500K","N600K-N1M","N2M+"],
+  ["Journalist","Media","N50K-N80K","N100K-N250K","N300K-N500K","N800K+"],
+  ["Film Director","Media","N100K-N200K","N300K-N600K","N700K-N1.5M","N3M+"],
+  ["Teacher (Secondary)","Education","N40K-N70K","N80K-N150K","N200K-N350K","N500K+"],
+  ["University Lecturer","Education","N150K-N250K","N300K-N500K","N600K-N900K","N1.5M+"],
+  ["Geologist","Science","N100K-N200K","N300K-N600K","N700K-N1.2M","N2M+"],
+  ["Pilot","Technical","N300K-N500K","N700K-N1.2M","N1.5M-N2.5M","N4M+"],
+  ["HR Manager","Finance","N80K-N130K","N200K-N400K","N500K-N800K","N1.2M+"],
+  ["Marketing Manager","Finance","N80K-N130K","N200K-N400K","N500K-N900K","N1.5M+"],
+  ["Graphic Designer","Technology","N50K-N80K","N100K-N250K","N300K-N600K","N1M+"]
+];
+
+var HOT_CAREERS = [
+  {title:"AI/ML Engineer",demand:"Very High",growth:"+45%",why:"ChatGPT boom created massive demand for AI integration in Nigerian banks and startups.",sal:"N400K-N1.5M/month",skills:["Python","TensorFlow","Data Science"]},
+  {title:"Cybersecurity Specialist",demand:"Critical",growth:"+38%",why:"Nigeria lost $800M to cybercrime in 2023. Every organisation now needs security expertise.",sal:"N300K-N1.2M/month",skills:["Ethical Hacking","SIEM","Network Security"]},
+  {title:"Full-Stack Developer",demand:"Very High",growth:"+32%",why:"Fintech and e-commerce explosion demands developers who build complete products alone.",sal:"N250K-N900K/month",skills:["React","Node.js","Databases"]},
+  {title:"Data Analyst",demand:"High",growth:"+28%",why:"CBN, FIRS, NNPC and banks all need analysts to drive evidence-based decisions.",sal:"N150K-N600K/month",skills:["Python","SQL","Power BI"]},
+  {title:"Product Manager",demand:"High",growth:"+25%",why:"Nigerian tech startups now compete globally and need experienced product thinkers.",sal:"N300K-N800K/month",skills:["Agile","UI/UX","Strategy"]},
+  {title:"DevOps / Cloud Engineer",demand:"High",growth:"+30%",why:"Cloud migration across banking and government driving huge demand for AWS/Azure skills.",sal:"N250K-N900K/month",skills:["AWS","Docker","CI/CD"]},
+  {title:"Medical Doctor (Specialist)",demand:"Critical",growth:"+20%",why:"Nigeria has only 4 doctors per 10,000 people vs WHO-recommended 23. Massive shortage.",sal:"N500K-N2M/month",skills:["Clinical","Surgery","Diagnosis"]},
+  {title:"Agricultural Engineer",demand:"High",growth:"+35%",why:"Federal N2 trillion agricultural modernisation programme needs engineers urgently.",sal:"N150K-N600K/month",skills:["Farm Systems","Irrigation","Machinery"]},
+  {title:"Renewable Energy Engineer",demand:"Growing",growth:"+40%",why:"Nigeria power crisis and solar adoption boom creating an entirely new career pathway.",sal:"N200K-N700K/month",skills:["Solar PV","Power Systems","Project Mgmt"]},
+  {title:"UX Researcher",demand:"Growing",growth:"+22%",why:"Nigerian apps serving global users need researchers who understand local context.",sal:"N150K-N500K/month",skills:["User Research","Figma","Data Analysis"]},
+  {title:"Supply Chain Analyst",demand:"Growing",growth:"+18%",why:"Post-naira devaluation exposed Nigeria supply chain weaknesses analysts can fix.",sal:"N150K-N500K/month",skills:["SAP","Logistics","Data Analysis"]},
+  {title:"Mental Health Counsellor",demand:"Growing",growth:"+15%",why:"Nigeria finally discussing mental health openly. Major gap between need and supply.",sal:"N80K-N400K/month",skills:["Counselling","CBT","Empathy"]}
+];
+
+var GLOBAL_SKILLS = [
+  {name:"Artificial Intelligence",score:95},
+  {name:"Cloud Computing (AWS/Azure)",score:90},
+  {name:"Cybersecurity",score:88},
+  {name:"Data Science and Analytics",score:87},
+  {name:"Full-Stack Development",score:84},
+  {name:"DevOps and Automation",score:80},
+  {name:"Product Management",score:75},
+  {name:"UI/UX Design",score:72},
+  {name:"Digital Marketing",score:68},
+  {name:"Financial Modelling",score:65}
+];
+
+// Override the minimal renderMarket with the comprehensive version
+renderMarket = function() {
+  var ms = document.getElementById('mktSec');
+  if (ms) ms.innerHTML = SECTORS_FULL.map(function(s) {
+    var bw = Math.min(100, s.g * 2.5);
+    return '<div style="padding:13px 18px;border-bottom:1px solid var(--bd)">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">'
+      +'<div class="fw6" style="font-size:13px;color:var(--g8)">'+H(s.n)+'</div>'
+      +'<div style="display:flex;gap:6px;flex-shrink:0">'
+      +'<span class="tag tg" style="font-size:10px;padding:2px 8px;margin:0">+'+s.g+'%</span>'
+      +'<span class="tag tb" style="font-size:10px;padding:2px 8px;margin:0">'+H(s.j)+'</span>'
+      +'</div></div>'
+      +'<div style="height:6px;background:var(--bd);border-radius:3px;margin-bottom:6px">'
+      +'<div style="height:100%;background:var(--g5);border-radius:3px;width:'+bw+'%;transition:width .5s ease"></div></div>'
+      +'<div style="font-size:11.5px;color:var(--t2)">'+H(s.w)+'</div>'
+      +'<div style="font-size:11px;color:var(--tm);margin-top:3px">Key skills: '+H(s.sk)+'</div>'
+      +'</div>';
+  }).join('');
+
+  var shareData = [{n:'Tech and Digital',pct:22,col:'var(--blue)'},{n:'Healthcare',pct:18,col:'var(--g6)'},{n:'Agriculture',pct:16,col:'var(--g4)'},{n:'Finance',pct:14,col:'var(--gd)'},{n:'Education',pct:12,col:'var(--purple)'},{n:'Public Sector',pct:10,col:'var(--orange)'},{n:'Other',pct:8,col:'var(--tm)'}];
+  var sb = document.getElementById('mktShareBars');
+  if (sb) sb.innerHTML = shareData.map(function(d) {
+    return '<div style="margin-bottom:12px">'
+      +'<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">'
+      +'<span class="fw6" style="color:var(--g8)">'+H(d.n)+'</span>'
+      +'<span style="color:var(--t2)">'+d.pct+'%</span></div>'
+      +'<div style="height:10px;background:var(--bd);border-radius:5px">'
+      +'<div style="height:100%;background:'+d.col+';border-radius:5px;width:'+(d.pct*4)+'%;transition:width .6s ease"></div></div>'
+      +'</div>';
+  }).join('');
+
+  var msal = document.getElementById('mktSalFull');
+  if (msal) msal.innerHTML = SALARIES_FULL.map(function(r) {
+    return '<tr><td class="fw6">'+H(r[0])+'</td><td><span class="tag tgr" style="font-size:10px">'+H(r[1])+'</span></td>'
+      +'<td style="color:var(--t2)">'+H(r[2])+'</td>'
+      +'<td style="color:var(--g6);font-weight:600">'+H(r[3])+'</td>'
+      +'<td style="color:var(--g7);font-weight:700">'+H(r[4])+'</td>'
+      +'<td style="color:var(--gd);font-weight:700">'+H(r[5])+'</td>'
+      +'</tr>';
+  }).join('');
+
+  var hcg = document.getElementById('hotCareersGrid');
+  if (hcg) hcg.innerHTML = HOT_CAREERS.map(function(c) {
+    var dc = c.demand === 'Critical' ? 'var(--red)' : c.demand === 'Very High' ? 'var(--g6)' : 'var(--gd)';
+    return '<div class="card"><div class="cbd" style="padding:16px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'
+      +'<div style="font-family:DM Serif Display,serif;font-size:15px;color:var(--g9)">'+H(c.title)+'</div>'
+      +'<span style="background:'+dc+';color:#fff;font-size:9.5px;font-weight:700;padding:3px 9px;border-radius:20px">'+H(c.demand)+'</span></div>'
+      +'<div style="font-size:11.5px;color:var(--g6);font-weight:600;margin-bottom:6px">'+H(c.growth)+' growth &bull; '+H(c.sal)+'</div>'
+      +'<p style="font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:10px">'+H(c.why)+'</p>'
+      +'<div class="tl">'+c.skills.map(function(s){return '<span class="tag tb" style="font-size:10px">'+H(s)+'</span>';}).join('')+'</div>'
+      +'</div></div>';
+  }).join('');
+
+  var gsb = document.getElementById('globalSkillBars');
+  if (gsb) gsb.innerHTML = GLOBAL_SKILLS.map(function(sk) {
+    return '<div style="margin-bottom:11px">'
+      +'<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">'
+      +'<span class="fw6" style="color:var(--g8)">'+H(sk.name)+'</span>'
+      +'<span style="color:var(--g6);font-weight:600">'+sk.score+'%</span></div>'
+      +'<div style="height:8px;background:var(--bd);border-radius:4px">'
+      +'<div style="height:100%;background:linear-gradient(to right,var(--g5),var(--g4));border-radius:4px;width:'+sk.score+'%;transition:width .6s ease"></div></div>'
+      +'</div>';
+  }).join('');
+};
+
+// ── CANVAS CHARTS ─────────────────────────────────────────────────
+var chartsDrawn = false;
+function drawCharts() {
+  if (chartsDrawn) return;
+  chartsDrawn = true;
+  var colors = ['#196342','#2ea86e','#134a33','#1f7a52','#d4a017','#e6b52a','#2563eb','#7c3aed','#ea580c','#dc2626'];
+
+  // Growth bar chart
+  var gc = document.getElementById('growthChart');
+  if (gc && gc.getContext) {
+    var ctx = gc.getContext('2d');
+    gc.width = gc.parentElement.clientWidth - 32 || 380;
+    gc.height = 260;
+    var W = gc.width, GH = gc.height;
+    var vals = SECTORS_FULL.map(function(s){ return s.g; });
+    var lbls = SECTORS_FULL.map(function(s){ return s.n.split(' ')[0]; });
+    var maxV = Math.max.apply(null, vals);
+    var pad = {t:20,r:20,b:55,l:38};
+    var cw = W-pad.l-pad.r, ch = GH-pad.t-pad.b;
+    var gap = cw/vals.length, bw = gap*0.6;
+    ctx.clearRect(0,0,W,GH);
+    for (var i=0;i<=5;i++) {
+      var gy=pad.t+ch*(1-i/5);
+      ctx.strokeStyle='#e5e7eb';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(pad.l,gy);ctx.lineTo(pad.l+cw,gy);ctx.stroke();
+      ctx.fillStyle='#9ca3af';ctx.font='10px sans-serif';ctx.textAlign='right';
+      ctx.fillText(Math.round(maxV*i/5)+'%',pad.l-4,gy+4);
+    }
+    vals.forEach(function(v,i) {
+      var x=pad.l+i*gap+(gap-bw)/2, bh=ch*v/maxV, y=pad.t+ch-bh;
+      var g2=ctx.createLinearGradient(0,y,0,y+bh);
+      g2.addColorStop(0,colors[i%colors.length]);g2.addColorStop(1,colors[i%colors.length]+'55');
+      ctx.fillStyle=g2;ctx.beginPath();ctx.rect(x,y,bw,bh);ctx.fill();
+      ctx.fillStyle='#134a33';ctx.font='bold 9px sans-serif';ctx.textAlign='center';
+      ctx.fillText(v+'%',x+bw/2,y-4);
+      ctx.fillStyle='#6b7280';ctx.font='9px sans-serif';
+      ctx.save();ctx.translate(x+bw/2,pad.t+ch+8);ctx.rotate(-0.6);ctx.textAlign='right';ctx.fillText(lbls[i],0,0);ctx.restore();
+    });
+  }
+
+  // Salary chart
+  var sc = document.getElementById('salaryChart');
+  if (sc && sc.getContext) {
+    var ctx2 = sc.getContext('2d');
+    sc.width = sc.parentElement.clientWidth - 32 || 380;
+    sc.height = 260;
+    var W2=sc.width, SH=sc.height;
+    var catD=[{n:'Technology',val:550},{n:'Healthcare',val:430},{n:'Engineering',val:480},{n:'Finance',val:420},{n:'Law',val:400},{n:'Media',val:280},{n:'Education',val:250},{n:'Science',val:300}];
+    var max2=Math.max.apply(null,catD.map(function(d){return d.val;}));
+    var pad2={t:20,r:20,b:55,l:46};
+    var cw2=W2-pad2.l-pad2.r, ch2=SH-pad2.t-pad2.b;
+    var gap2=cw2/catD.length, bw2=gap2*0.6;
+    ctx2.clearRect(0,0,W2,SH);
+    for (var j=0;j<=4;j++) {
+      var gy2=pad2.t+ch2*(1-j/4);
+      ctx2.strokeStyle='#e5e7eb';ctx2.lineWidth=1;
+      ctx2.beginPath();ctx2.moveTo(pad2.l,gy2);ctx2.lineTo(pad2.l+cw2,gy2);ctx2.stroke();
+      ctx2.fillStyle='#9ca3af';ctx2.font='10px sans-serif';ctx2.textAlign='right';
+      ctx2.fillText('N'+Math.round(max2*j/4)+'K',pad2.l-4,gy2+4);
+    }
+    catD.forEach(function(d,i) {
+      var x2=pad2.l+i*gap2+(gap2-bw2)/2, bh2=ch2*d.val/max2, y2=pad2.t+ch2-bh2;
+      var g3=ctx2.createLinearGradient(0,y2,0,y2+bh2);
+      g3.addColorStop(0,'#d4a017');g3.addColorStop(1,'#d4a01755');
+      ctx2.fillStyle=g3;ctx2.beginPath();ctx2.rect(x2,y2,bw2,bh2);ctx2.fill();
+      ctx2.fillStyle='#7a5200';ctx2.font='bold 9px sans-serif';ctx2.textAlign='center';
+      ctx2.fillText('N'+d.val+'K',x2+bw2/2,y2-4);
+      ctx2.fillStyle='#6b7280';ctx2.font='9px sans-serif';
+      ctx2.save();ctx2.translate(x2+bw2/2,pad2.t+ch2+8);ctx2.rotate(-0.6);ctx2.textAlign='right';ctx2.fillText(d.n,0,0);ctx2.restore();
+    });
+  }
+
+  // Donut chart
+  var dc = document.getElementById('streamChart');
+  if (dc && dc.getContext) {
+    var ctx3=dc.getContext('2d');
+    dc.width=dc.parentElement.clientWidth-32||650;
+    dc.height=190;
+    var W3=dc.width;
+    var pieD=[{n:'Science Stream',val:40,col:'#196342'},{n:'Commercial Stream',val:28,col:'#d4a017'},{n:'Art/Humanities',val:20,col:'#7c3aed'},{n:'Technical/Vocational',val:12,col:'#2563eb'}];
+    var cx3=W3/4, cy3=88, rr=65, st=-Math.PI/2;
+    ctx3.clearRect(0,0,W3,190);
+    pieD.forEach(function(d) {
+      var sl=d.val/100*Math.PI*2;
+      ctx3.beginPath();ctx3.moveTo(cx3,cy3);ctx3.arc(cx3,cy3,rr,st,st+sl);ctx3.closePath();
+      ctx3.fillStyle=d.col;ctx3.fill();
+      ctx3.strokeStyle='#fff';ctx3.lineWidth=2;ctx3.stroke();
+      st+=sl;
+    });
+    ctx3.beginPath();ctx3.arc(cx3,cy3,36,0,Math.PI*2);ctx3.fillStyle='#fff';ctx3.fill();
+    ctx3.fillStyle='#0d2e1f';ctx3.font='bold 10px sans-serif';ctx3.textAlign='center';
+    ctx3.fillText('Career',cx3,cy3-3);ctx3.fillText('Demand',cx3,cy3+11);
+    var lx=W3/2+10, ly=18;
+    pieD.forEach(function(d,i) {
+      ctx3.fillStyle=d.col;ctx3.fillRect(lx,ly+i*42,14,14);
+      ctx3.fillStyle='#0d2e1f';ctx3.font='bold 12px sans-serif';ctx3.textAlign='left';
+      ctx3.fillText(d.n,lx+20,ly+i*42+11);
+      ctx3.fillStyle='#6b7280';ctx3.font='11px sans-serif';
+      ctx3.fillText(d.val+'% of career demand',lx+20,ly+i*42+26);
+    });
+  }
+}
+
+
+
+/* ═══════════════════════════════════════
+   AUTH SYSTEM — localStorage-based
+   (production would use a real backend)
+═══════════════════════════════════════ */
+
+// ── Stars
+(function(){
+  var c=document.getElementById('authStars');
+  for(var i=0;i<60;i++){
+    var s=document.createElement('span');
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.setProperty('--d',(2+Math.random()*4)+'s');
+    s.style.setProperty('--dl',(Math.random()*4)+'s');
+    s.style.setProperty('--op',(0.15+Math.random()*0.55).toFixed(2));
+    c.appendChild(s);
+  }
+})();
+
+// ── Auth state helpers
+function getUsers(){try{return JSON.parse(localStorage.getItem('pp_users')||'[]');}catch(e){return[];}}
+function saveUsers(u){localStorage.setItem('pp_users',JSON.stringify(u));}
+function getCurrentUser(){try{return JSON.parse(localStorage.getItem('pp_session')||'null');}catch(e){return null;}}
+function setCurrentUser(u){if(u)localStorage.setItem('pp_session',JSON.stringify(u));else localStorage.removeItem('pp_session');}
+
+// ── Init overlay on page load
+window.addEventListener('DOMContentLoaded',function(){
+  // Generate stars already handled above
+  var cu=getCurrentUser();
+  if(cu){
+    hideAuthOverlay(cu,false);
+  } else {
+    document.getElementById('authOverlay').style.display='flex';
+    document.body.style.overflow='hidden';
+  }
+});
+
+function showAuthOverlay(){
+  document.getElementById('authOverlay').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+
+function hideAuthOverlay(user,animate){
+  var ov=document.getElementById('authOverlay');
+  if(animate){
+    ov.style.transition='opacity .5s ease';
+    ov.style.opacity='0';
+    setTimeout(function(){
+      ov.style.display='none';
+      ov.style.opacity='1';
+      ov.style.transition='';
+      document.body.style.overflow='';
+      applyUserUI(user);
+    },520);
+  } else {
+    ov.style.display='none';
+    document.body.style.overflow='';
+    applyUserUI(user);
+  }
+}
+
+function applyUserUI(user){
+  if(!user) return;
+  // Topbar chip
+  var chip=document.getElementById('userChip');
+  var gb=document.getElementById('guestBrand');
+  chip.style.display='flex';
+  gb.style.display='none';
+  document.getElementById('chipNm').textContent=user.fname||user.name||'User';
+  document.getElementById('dropName').textContent=(user.fname||'')+(user.lname?' '+user.lname:'')|| user.name||'User';
+  document.getElementById('dropEmail').textContent=user.email||'';
+  // Sidebar footer
+  document.getElementById('sbFootGuest').style.display='none';
+  document.getElementById('sbFootUser').style.display='flex';
+  document.getElementById('sbUname').textContent=user.fname||user.name||'User';
+  document.getElementById('sbAva').textContent=(user.fname||user.name||'U').charAt(0).toUpperCase();
+  // Dashboard welcome message
+  var welEl=document.getElementById('dWel');
+  if(welEl){
+    if(user.guest){
+      welEl.textContent='Welcome to PathPilot!';
+    } else if(user.fname){
+      welEl.textContent='Welcome to PathPilot, '+user.fname+'! \uD83D\uDC4B';
+    } else {
+      welEl.textContent='Welcome to PathPilot!';
+    }
+  }
+  var welSub=document.getElementById('dWelSub');
+  if(welSub){
+    welSub.innerHTML=user.guest?
+      'Explore careers, skills, and academic pathways with confidence.':
+      'Your dashboard is ready &mdash; built by <strong>Emmyxoxo</strong>.';
+  }
+  // Update profile page pre-fill
+  var pfNm=document.getElementById('pfNm');
+  if(pfNm) pfNm.value=(user.fname||'')+' '+(user.lname||'');
+  var pName=document.getElementById('pName');
+  if(pName) pName.textContent=(user.fname||'')+' '+(user.lname||'');
+  // Update sidebar state var
+  S.name=user.fname||user.name||'Explorer';
+}
+
+// ── Tab switching
+function switchAuthTab(tab){
+  ['login','register'].forEach(function(t){
+    document.getElementById('atab-'+t).classList.toggle('on',t===tab);
+    document.getElementById('af-'+t).classList.toggle('on',t===tab);
+  });
+  clearAuthErrors();
+}
+
+function clearAuthErrors(){
+  document.querySelectorAll('.af-err').forEach(function(e){e.classList.remove('show');});
+  document.querySelectorAll('.af-input').forEach(function(i){i.classList.remove('err');});
+}
+
+// ── Password toggle
+function togglePw(id,btn){
+  var inp=document.getElementById(id);
+  if(inp.type==='password'){inp.type='text';btn.innerHTML='&#128683;';}
+  else{inp.type='password';btn.innerHTML='&#128065;';}
+}
+
+// ── Password strength
+document.addEventListener('DOMContentLoaded',function(){
+  var pf=document.getElementById('rg-pass');
+  if(!pf) return;
+  pf.addEventListener('input',function(){
+    var v=pf.value, st=document.getElementById('rg-pass-strength');
+    if(!v){st.textContent='';st.style.color='';return;}
+    var sc=0;
+    if(v.length>=6)sc++;if(v.length>=10)sc++;
+    if(/[A-Z]/.test(v))sc++;if(/[0-9]/.test(v))sc++;if(/[^a-zA-Z0-9]/.test(v))sc++;
+    var labels=['','Weak','Fair','Good','Strong','Very strong'];
+    var cols=['','#ef4444','#f97316','#eab308','#22c55e','#16a34a'];
+    st.textContent='Strength: '+(labels[sc]||'Weak');
+    st.style.color=cols[sc]||cols[1];
+  });
+});
+
+function showErr(id,msg){
+  var el=document.getElementById(id);
+  if(el){if(msg)el.textContent=msg;el.classList.add('show');}
+  var inp=document.getElementById(id.replace('-err',''));
+  if(inp&&inp.classList) inp.classList.add('err');
+}
+function hideErr(id){
+  var el=document.getElementById(id);if(el)el.classList.remove('show');
+  var inp=document.getElementById(id.replace('-err',''));
+  if(inp&&inp.classList) inp.classList.remove('err');
+}
+
+// ── Login
+function doLogin(){
+  clearAuthErrors();
+  var email=document.getElementById('li-email').value.trim();
+  var pass=document.getElementById('li-pass').value;
+  var ok=true;
+  if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){showErr('li-email-err');ok=false;}
+  if(!pass||pass.length<6){showErr('li-pass-err');ok=false;}
+  if(!ok) return;
+  setLoading('li',true);
+  setTimeout(function(){
+    var users=getUsers();
+    var user=users.find(function(u){return u.email.toLowerCase()===email.toLowerCase();});
+    if(!user){
+      setLoading('li',false);
+      showErr('li-global-err','No account found with that email. Please register first.');
+      return;
+    }
+    if(user.pass!==btoa(pass)){
+      setLoading('li',false);
+      showErr('li-global-err','Incorrect password. Please try again.');
+      return;
+    }
+    setLoading('li',false);
+    if(document.getElementById('li-remember').checked) setCurrentUser(user);
+    showAuthSuccess('&#128075;','Welcome back, '+user.fname+'!','Taking you to your dashboard...',function(){
+      hideAuthOverlay(user,true);
+    });
+  },800);
+}
+
+// ── Register
+function doRegister(){
+  clearAuthErrors();
+  var fname=document.getElementById('rg-fname').value.trim();
+  var lname=document.getElementById('rg-lname').value.trim();
+  var email=document.getElementById('rg-email').value.trim();
+  var school=document.getElementById('rg-school').value.trim();
+  var pass=document.getElementById('rg-pass').value;
+  var pass2=document.getElementById('rg-pass2').value;
+  var secq=document.getElementById('rg-secq').value;
+  var seca=document.getElementById('rg-seca').value.trim();
+  var terms=document.getElementById('rg-terms').checked;
+  var ok=true;
+  if(!fname){showErr('rg-fname-err');ok=false;}
+  if(!lname){showErr('rg-lname-err');ok=false;}
+  if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){showErr('rg-email-err');ok=false;}
+  if(!pass||pass.length<6){showErr('rg-pass-err');ok=false;}
+  if(pass!==pass2){showErr('rg-pass2-err');ok=false;}
+  if(!secq){showErr('rg-secq-err');ok=false;}
+  if(!seca){showErr('rg-seca-err');ok=false;}
+  if(!terms){showErr('rg-terms-err');ok=false;}
+  if(!ok) return;
+  setLoading('rg',true);
+  setTimeout(function(){
+    var users=getUsers();
+    if(users.find(function(u){return u.email.toLowerCase()===email.toLowerCase();})){
+      setLoading('rg',false);
+      showErr('rg-global-err','An account with this email already exists. Please sign in.');
+      return;
+    }
+    var newUser={id:Date.now(),fname:fname,lname:lname,email:email,school:school||'',pass:btoa(pass),secq:secq,seca:btoa(seca.toLowerCase()),joined:new Date().toLocaleDateString('en-GB',{month:'short',year:'numeric'})};
+    users.push(newUser);
+    saveUsers(users);
+    setCurrentUser(newUser);
+    setLoading('rg',false);
+    showAuthSuccess('&#127881;','Account created!','Welcome to PathPilot, '+fname+'!',function(){
+      hideAuthOverlay(newUser,true);
+    });
+  },900);
+}
+
+// ── Guest access
+function guestAccess(){
+  var guestUser={id:'guest',fname:'Explorer',lname:'',email:'',school:'',guest:true};
+  showAuthSuccess('&#9654;','Continuing as Guest','Enjoy PathPilot — no account needed!',function(){
+    hideAuthOverlay(guestUser,true);
+  });
+}
+
+// ── Forgot password — security question flow
+var _fpUser=null;
+
+function fpShowStep(step){
+  [1,2,3].forEach(function(n){
+    document.getElementById('fp-step'+n).classList.toggle('on',n===step);
+  });
+}
+
+function showForgot(){
+  clearAuthErrors();
+  fpShowStep(1);
+  document.getElementById('fp-email').value=document.getElementById('li-email').value.trim();
+  document.getElementById('fp-seca').value='';
+  document.getElementById('fp-pass').value='';
+  document.getElementById('fp-pass2').value='';
+  _fpUser=null;
+  document.getElementById('forgotOverlay').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+
+function fpCancel(){
+  document.getElementById('forgotOverlay').style.display='none';
+  document.body.style.overflow='';
+  _fpUser=null;
+}
+
+// Step 1 → find the account by email
+function fpFindAccount(){
+  hideErr('fp-email-err');
+  var email=document.getElementById('fp-email').value.trim();
+  if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){showErr('fp-email-err','Please enter a valid email address.');return;}
+  setLoading('fp1',true);
+  setTimeout(function(){
+    var users=getUsers();
+    var user=users.find(function(u){return u.email&&u.email.toLowerCase()===email.toLowerCase();});
+    setLoading('fp1',false);
+    if(!user||!user.secq){
+      showErr('fp-email-err','We couldn\'t find an account with that email.');
+      return;
+    }
+    _fpUser=user;
+    document.getElementById('fp-secq-tx').textContent=user.secq;
+    document.getElementById('fp-seca').value='';
+    fpShowStep(2);
+  },500);
+}
+
+// Step 2 → verify the security answer
+function fpVerifyAnswer(){
+  hideErr('fp-seca-err');
+  if(!_fpUser){fpShowStep(1);return;}
+  var answer=document.getElementById('fp-seca').value.trim();
+  if(!answer){showErr('fp-seca-err','Please provide an answer.');return;}
+  setLoading('fp2',true);
+  setTimeout(function(){
+    setLoading('fp2',false);
+    if(btoa(answer.toLowerCase())!==_fpUser.seca){
+      showErr('fp-seca-err','That answer doesn\'t match our records.');
+      return;
+    }
+    document.getElementById('fp-pass').value='';
+    document.getElementById('fp-pass2').value='';
+    fpShowStep(3);
+  },500);
+}
+
+// Step 3 → save the new password
+function fpResetPassword(){
+  hideErr('fp-pass-err');hideErr('fp-pass2-err');
+  if(!_fpUser){fpShowStep(1);return;}
+  var pass=document.getElementById('fp-pass').value;
+  var pass2=document.getElementById('fp-pass2').value;
+  var ok=true;
+  if(!pass||pass.length<6){showErr('fp-pass-err');ok=false;}
+  if(pass!==pass2){showErr('fp-pass2-err');ok=false;}
+  if(!ok) return;
+  setLoading('fp3',true);
+  setTimeout(function(){
+    var users=getUsers();
+    var idx=users.findIndex(function(u){return u.id===_fpUser.id;});
+    if(idx===-1){
+      setLoading('fp3',false);
+      showErr('fp-pass2-err','Something went wrong finding your account. Please try again.');
+      return;
+    }
+    users[idx].pass=btoa(pass);
+    saveUsers(users);
+    // Keep an active session in sync if you were already logged in as this user
+    var cu=getCurrentUser();
+    if(cu&&cu.id===users[idx].id) setCurrentUser(users[idx]);
+    setLoading('fp3',false);
+    fpCancel();
+    document.getElementById('li-email').value=_fpUser.email;
+    switchAuthTab('login');
+    showToast('Password reset! You can now sign in with your new password.');
+    _fpUser=null;
+  },700);
+}
+
+// ── Logout
+function doLogout(){
+  setCurrentUser(null);
+  closeUserDrop();
+  // Reset UI
+  document.getElementById('userChip').style.display='none';
+  document.getElementById('guestBrand').style.display='flex';
+  document.getElementById('sbFootGuest').style.display='flex';
+  document.getElementById('sbFootUser').style.display='none';
+  showAuthOverlay();
+  switchAuthTab('login');
+  showToast('You have been signed out.');
+}
+
+// ── User dropdown
+function toggleUserDrop(){
+  document.getElementById('userDrop').classList.toggle('open');
+}
+function closeUserDrop(){
+  document.getElementById('userDrop').classList.remove('open');
+}
+document.addEventListener('click',function(e){
+  var chip=document.getElementById('userChip');
+  var drop=document.getElementById('userDrop');
+  if(drop && !chip.contains(e.target) && !drop.contains(e.target)) drop.classList.remove('open');
+});
+
+// ── Loading state
+function setLoading(prefix,on){
+  var btn=document.getElementById(prefix+'-btn');
+  var tx=document.getElementById(prefix+'-btn-tx');
+  var sp=document.getElementById(prefix+'-spin');
+  if(!btn) return;
+  btn.classList.toggle('loading',on);
+  if(tx) tx.style.display=on?'none':'block';
+  if(sp) sp.style.display=on?'block':'none';
+}
+
+// ── Success screen
+function showAuthSuccess(ico,title,sub,cb){
+  var ov=document.getElementById('authSuccess');
+  document.getElementById('authSuccessIco').innerHTML=ico;
+  document.getElementById('authSuccessTx').textContent=title;
+  document.getElementById('authSuccessSub').textContent=sub;
+  ov.classList.add('show');
+  var bar=document.getElementById('authBar');
+  bar.style.width='0';
+  setTimeout(function(){bar.style.width='100%';},50);
+  setTimeout(function(){ov.classList.remove('show');bar.style.width='0';if(cb)cb();},1900);
+}
+
+
+</script>
+</body>
+</html>
